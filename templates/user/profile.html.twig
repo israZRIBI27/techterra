@@ -1,3 +1,196 @@
-{% block body %}
-<div> {{app.user.firstname}}<div/>
+{% extends "_bases/base.html.twig" %}
+{% block title %}Account Profile
 {% endblock %}
+{% block content %}
+{% for message in app.flashes('message')%}
+    <div>
+        <div>
+            <div class="p-3 my-2 rounded -2 success" >{{message}}</div>
+        </div>
+    <div/>
+{% endfor %}
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="profile">
+					<div class="profile-head">
+
+						<div class="profile-info">
+							<div class="row justify-content-left">
+								<div class="col-xl-8">
+									<div class="row">
+
+
+										<div>
+
+											<div class="profile-photo">
+												{% set profilePicture = app.user.getUserPicture %}
+												<img src="{{ asset('Images/ProfileImages/' ~ profilePicture) }} " style="width:100px;height:auto;" class="img-fluid rounded-circle" alt="">
+											</div>
+										</div>
+
+
+										<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
+											<div class="profile-name">
+												<h4 class="text-primary">{{app.user.getUserUsername}}</h4>
+												<p>
+													{% for role in app.user.getRoles %}
+														{% if role == "ROLE_USER" %}User
+															{% elseif role == "ROLE_ADMIN" %}Admin
+														{% endif %}
+														{% if not loop.last %},
+														{% endif %}
+													{% endfor %}
+												</p>
+											</div>
+										</div>
+
+
+										<div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+											<div class="profile-email">
+												<h4 class="text-muted">{{app.user.getEmail}}</h4>
+												<p>Email</p>
+											</div>
+										</div>
+										<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
+											<div class="profile-call">
+												<h4 class="text-muted">{{app.user.getUserphonenumber}}</h4>
+												<p>Phone No.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Edit your Profile!</h4>
+					</div>
+					{{form_start(form)}}
+					<div class="card-body">
+						<div class="form-validation">
+							<form class="form-valide" method="post">
+                            					{{form_start(form)}}
+
+								<div class="row">
+									<div class="col-xl-6">
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-username">Username
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_username) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-email">Email
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.email) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-email">Firt Name:
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_firstname) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-email">Last Name:
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_lastname) }}
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-6">
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-skill">Best Skill
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_gender) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-currency">Profile Picture:
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+                                            {{ form_widget(form.user_picture, {'attr': {'placeholder': app.user.getUserPicture}}) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-website">Birthday:
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_birthday) }}
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label" for="val-phoneus">Phone:
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-6">
+												{{ form_widget(form.user_phonenumber) }}
+
+											</div>
+										</div>
+
+
+										<div class="form-group row">
+											<label class="col-lg-4 col-form-label">
+												<a href="javascript:void()">Terms &amp; Conditions</a>
+												<span class="text-danger">*</span>
+											</label>
+											<div class="col-lg-8">
+												<label class="css-control css-control-primary css-checkbox" for="val-terms">
+													<input type="checkbox" class="css-control-input mr-2" id="val-terms" name="val-terms" value="1">
+													<span class="css-control-indicator"></span>
+													I agree to the terms</label>
+											</div>
+										</div>
+
+												<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+										<div class="form-group row">
+											<div class="col-lg-8 ml-auto">
+												<button type="submit" class="btn btn-success">Apply Changes</button>
+											</div>
+                                            <div class="col-lg-8 ml-auto">
+												<a href="{{path('app_user_editpassword')}}">Edit Password</a>
+											</div>
+										</div>
+									</div>
+								</div>
+                                	{{form_end(form)}}
+							</form>
+						</div>
+					</div>
+				
+
+				</div>
+			</div>
+
+
+		{% endblock %}

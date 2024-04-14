@@ -1,14 +1,18 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 
-{% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
-{% endblock %}
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Focus - Bootstrap Admin Dashboard
+		</title>
+		<!-- Favicon icon -->
+		<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-{% block title %}Log in!
-{% endblock %}
+	</head>
 
-{% block body %}
 	<body class="h-100">
 		<div class="authincation h-100">
 			<div class="container-fluid h-100">
@@ -18,6 +22,7 @@
 							<div class="row no-gutters">
 								<div class="col-xl-12">
 									<div class="auth-form">
+										<h4 class="text-center mb-4">Sign in your account</h4>
 										<form method="post">
 											{% if error %}
 												<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -31,26 +36,43 @@
 												</div>
 											{% endif %}
 
-											<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 											<div class="form-group">
-
-												<label for="inputEmail">Email</label>
-												<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+												<label>
+													<strong>Email</strong>
+												</label>
+												<input input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 											</div>
 											<div class="form-group">
-
-												<label for="inputPassword">Password</label>
+												<label>
+													<strong>Password</strong>
+												</label>
 												<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 											</div>
+											<div class="form-row d-flex justify-content-between mt-4 mb-2">
+												<div class="form-group">
+													<div class="form-check ml-2">
+														<input class="form-check-input" type="checkbox" id="basic_checkbox_1">
+														<label class="form-check-label" for="basic_checkbox_1">Remember me</label>
+													</div>
+												</div>
+												<div class="form-group">
+													<a href="{{path('app_forgot_password_request')}}">Forgot password?<a/>
+													</div>
+												</div>
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary btn-block">Sign me in</button>
+												</div>
 
-											<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-											<p>
-												<a href="{{path('app_forgot_password_request')}}">Forgot password?<a/>
+												<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+											</form>
+											<div class="new-account mt-3">
+												<p>Don't have an account?
+													<a class="text-primary" href="{{path('app_register')}}">Sign up</a>
 												</p>
-												<button class="btn btn-lg btn-primary" type="submit">
-													Sign in</button>
-											</p>
-										</form>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -58,7 +80,72 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
+
+			<!--**********************************
+			        Scripts
+			    ***********************************-->
+			<!-- Required vendors -->
+			<script src="vendor/global/global.min.js"></script>
+			<script src="js/quixnav-init.js"></script>
+			<script src="js/custom.min.js"></script>
+		</body>
 	</body>
-{% endblock %}
+</html>
+
+
+
+
+<form>
+  <!-- Email input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <input type="email" id="form2Example1" class="form-control" />
+    <label class="form-label" for="form2Example1">Email address</label>
+  </div>
+
+  <!-- Password input -->
+  <div data-mdb-input-init class="form-outline mb-4">
+    <input type="password" id="form2Example2" class="form-control" />
+    <label class="form-label" for="form2Example2">Password</label>
+  </div>
+
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+        <label class="form-check-label" for="form2Example31"> Remember me </label>
+      </div>
+    </div>
+
+    <div class="col">
+      <!-- Simple link -->
+      <a href="#!">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Not a member? <a href="#!">Register</a></p>
+    <p>or sign up with:</p>
+    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-google"></i>
+    </button>
+
+    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-twitter"></i>
+    </button>
+
+    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+      <i class="fab fa-github"></i>
+    </button>
+  </div>
+</form>
