@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EditProfileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class UserController extends AbstractController
@@ -38,11 +39,6 @@ class UserController extends AbstractController
 
             $user->setUserPicture($newFilename);
 
-
-
-
-
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -57,7 +53,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/profile/editPassword', name: 'app_user_editpassword')]
-    public function editPass(Request $request, PasswordHasherInterface $passwordHasher): Response
+    public function editPass(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
@@ -77,7 +73,7 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->render('users/editpass.html.twig');
+        return $this->render('user/editPassword.html.twig');
     }
 
 }

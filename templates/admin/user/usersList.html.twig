@@ -1,0 +1,88 @@
+{% extends "_bases/base.html.twig" %}
+{% block title %}
+	Account Profile
+{% endblock %}
+{% block content %}
+
+{% for message in app.flashes('message')%}
+    <div>
+        <div>
+            <div class="p-3 my-2 rounded -2 success" >{{message}}</div>
+        </div>
+    <div/>
+{% endfor %}
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="card-title">Bordered Table</h4>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered verticle-middle table-responsive-sm">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">E-mail</th>
+									<th scope="col">Role</th>
+									<th scope="col">Username</th>
+									<th scope="col">First Name</th>
+									<th scope="col">Last Name</th>
+									<th scope="col">Birthday</th>
+									<th scope="col">Gender</th>
+									<th scope="col">Phone Number</th>
+									<th scope="col">Level</th>
+									<th scope="col">Pictures</th>
+									<th scope="col">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for user in users %}
+									<tr>
+										<td>{{user.getId}}</td>
+
+										<td>{{user.Email}}</td>
+
+										<td>
+											<ul>
+												{% for role in user.getRoles %}
+													<li>{{ role }}</li>
+												{% endfor %}
+											</ul>
+										</td>
+
+										<td>{{user.getUserusername}}</td>
+
+										<td>{{user.getUserfirstname}}</td>
+
+										<td>{{user.getUserlastname}}</td>
+
+										<td>{{ user.getUserbirthday | date('Y-m-d') }}</td>
+
+										<td>{{ user.getUserGender}}</td>
+
+										<td>
+											{{ user.getUserPhonenumber}}
+										</td>
+
+										<td>
+											{{ user.getUserLevel}}
+										</td>
+										<td>
+											<img src="../Images/ProfileImages/{{user.userPicture}}" alt="{{ user.userPicture }}" style="max-width: 100px; height: auto"/>
+										</td>
+										<td>
+											<a class="badge badge-danger" href="{{path('app_admin_userManagement_deleteUser',{'id':user.id})}}">Delete</a>
+										</td>
+
+									</tr>
+								{% endfor %}
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

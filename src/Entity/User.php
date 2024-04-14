@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,6 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: "Email is required")]
+    #[Assert\Email(message: "Invalid email format")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -31,34 +34,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Password is required")]
+    #[Assert\Length(min: 8, minMessage: "Password must be at least {{ limit }} characters long")]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Username is required")]
     private ?string $user_username = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "First Name is required")]
     private ?string $user_firstname = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Last Name is required")]
     private ?string $user_lastname = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $user_birthday = null;
 
     #[ORM\Column(length: 200)]
+    #[Assert\NotBlank(message: "Gender is required")]
     private ?string $user_gender = null;
 
     #[ORM\Column(length: 200)]
     private ?string $user_picture = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Phone number is required")]
+    #[Assert\Regex(pattern: "/^\d{8}$/", message: "Invalid phone number format (8 digits)")]
     private ?string $user_phonenumber = null;
 
     #[ORM\Column]
-    private ?int $user_level = null;
+    private ?int $user_level = 1;
 
     public function getId(): ?int
     {
