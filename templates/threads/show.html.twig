@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thread Details{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card mt-5">
+                    <div class="card-header">
+
+                        <div class="row">
+                            <div class="col-auto">
+
+                        {{ form_start(voteForm)}}
+                        {{ form_widget(voteForm.user, {'attr': {'style': 'display:none;'}}) }}
+                        {{ form_widget(voteForm.threads, {'attr': {'style': 'display:none;'}}) }}
+                        <input type="hidden" id="voteType" name="voteType" value="">
+                        <button type="submit" id="submit-btn" style="display: none;">Vote</button>
+                        {{ form_end(voteForm) }}
+
+                            </div>
+                            <div class="col">
+
+                        <h2 class="card-title">{{ thread.title }}</h2>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <p>{{ thread.countVotesAsString() }}</p>
+
+                                    <p class="card-text text-muted">{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i') : '' }}</p>
+
+                                </div>
+
+
+                        </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ thread.content |raw }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_threads_index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
+                        <a href="{{ path('app_threads_edit', {'threadId': thread.threadId}) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
+                        {{ include('threads/_delete_form.html.twig') }}
+                    </div>
+                </div>
+                <hr>
+
+
+
+
+
+                <script>
+                    document.querySelectorAll('.upvote-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            document.getElementById('voteType').value = 'upvote';
+                            document.getElementById('submit-btn').click(); // Submit the form
+                        });
+                    });
+
+                    document.querySelectorAll('.downvote-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            document.getElementById('voteType').value = 'downvote';
+                            document.getElementById('submit-btn').click(); // Submit the form
+                        });
+                    });
+                </script>
+
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h3 class="card-title">Add a Comment</h3>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(commentForm, {'attr': {'id': 'comment-form'}}) }}
+                        {{ form_widget(commentForm.content) }}
+                        {{ form_widget(commentForm.createdAt, {'attr': {'style': 'display:none;'}}) }}
+                        {{ form_widget(commentForm.user, {'attr': {'style': 'display:none;'}}) }}
+                        {{ form_widget(commentForm.threads, {'attr': {'style': 'display:none;'}}) }}
+
+                        {{ form_widget(commentForm.envoyer, {'attr': {'class': 'btn btn-primary mt-3'}}) }}
+                        {{ form_end(commentForm) }}
+                    </div>
+                </div>
+                <hr>
+                <h3 class="mt-5">Comments</h3>
+                {% for comment in thread.replies %}
+                    <div class="card mt-3">
+
+                        <div class="card-header" style="display: flex;align-items: center;justify-content: space-between;">
+                            <span><i class="bi bi-person me-1"></i>
+                                {{ comment.user }}
+                            </span>
+
+
+                            <span class="text-muted">
+                               <i class="bi bi-clock me-1"></i>
+
+                                {{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i') : '' }}
+<a href="{{ path('front_reply_delete', {'threadId': thread.threadId, 'replyId': comment.replyId}) }}" class="btn btn-danger ms-2" onclick="event.preventDefault(); document.getElementById('delete-form-{{ comment.replyId }}').submit();"><i class="bi bi-trash"></i></a>
+
+<form id="delete-form-{{ comment.replyId }}" action="{{ path('front_reply_delete', {'threadId': thread.threadId, 'replyId': comment.replyId}) }}" method="POST" style="display: none;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.replyId) }}">
+</form>                            </span>
+
+                        </div>
+
+                        <div class="card-body">
+                            <p class="card-text">{{ comment.content|raw }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

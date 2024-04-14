@@ -1,0 +1,42 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Threads index{% endblock %}
+
+{% block body %}
+    <h1>Threads index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ThreadId</th>
+                <th>By</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for thread in threads %}
+            <tr>
+                <td>{{ thread.threadId }}</td>
+                <td>{{ thread.user }}</td>
+
+                <td>{{ thread.title }}</td>
+                <td>{{ thread.content |slice(0, 100)|striptags ~ '...' }}</td>
+                <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_backend_threads_show', {'threadId': thread.threadId}) }}">show</a>
+                    <a href="{{ path('app_backend_threads_edit', {'threadId': thread.threadId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_backend_threads_new') }}">Create new</a>
+{% endblock %}
