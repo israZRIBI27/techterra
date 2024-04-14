@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+# config/routes.yaml
+
+app_news_show:
+    path: /news/{id}
+    controller: App\Controller\NewsController::show
+    methods: ['GET']
+
