@@ -29,6 +29,8 @@ class CommentsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comments::class,
+            'html5' => false,
+            'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
 }

@@ -37,7 +37,13 @@ class NewsController extends AbstractController
         $this->user = $this->userRepository->findOneBy(['userId' => 1]); // Adjust the condition as per your user entity
     }
 
-
+    #[Route('/admin', name: 'app_news_indexAdmin', methods: ['GET'])]
+    public function indexAdmin(NewsRepository $newsRepository): Response
+    {
+        return $this->render('news/backindex.html.twig', [
+            'news' => $newsRepository->findAll(),
+        ]);
+    }
     #[Route('/', name: 'app_news_index', methods: ['GET'])]
     public function index(NewsRepository $newsRepository): Response
     {
@@ -107,6 +113,7 @@ class NewsController extends AbstractController
             // Redirect to the same page to prevent resubmission
             return $this->redirectToRoute('app_news_show', ['idNews' => $news->getIdNews()]);
         }
+        
         // Render the template with the news, comments, and comment form
         return $this->render('news/show.html.twig', [
             'news' => $news,
@@ -145,5 +152,15 @@ class NewsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/admin/{idNews}', name: 'app_news_deleteAdmin', methods: ['POST'])]
+    public function deleteAdmin(Request $request, News $news, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$news->getIdNews(), $request->request->get('_token'))) {
+            $entityManager->remove($news);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_news_indexAdmin', [], Response::HTTP_SEE_OTHER);
     }
 }
