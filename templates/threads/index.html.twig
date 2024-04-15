@@ -22,8 +22,13 @@
                                 </p>
                             </div>
                             <div class="card-footer text-muted">
-                                <p>CreatedAt: {{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</p>
                                 <a href="{{ path('app_threads_edit', {'threadId': thread.threadId}) }}" class="btn btn-secondary">Edit</a>
+                                <p class="text-light" style="    background: #45835f;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display:inline;">{{ thread.createdAt ? thread.createdAt|date('Y-m-d') : '' }}</p>
+                                {% if thread.category is not null %}
+
+                                <p class="text-light" style="    background: #e0895b;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display: inline">{{thread.category}}</p>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>

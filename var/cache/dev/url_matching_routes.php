@@ -10,6 +10,8 @@ return [
     [ // $staticRoutes
         '/backend/threads' => [[['_route' => 'app_backend_threads_index', '_controller' => 'App\\Controller\\BackendThreadsController::index'], null, ['GET' => 0], null, true, false, null]],
         '/backend/threads/new' => [[['_route' => 'app_backend_threads_new', '_controller' => 'App\\Controller\\BackendThreadsController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/backend/topics' => [[['_route' => 'app_backend_topics_index', '_controller' => 'App\\Controller\\BackendTopicsController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/backend/topics/new' => [[['_route' => 'app_backend_topics_new', '_controller' => 'App\\Controller\\BackendTopicsController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/replies' => [[['_route' => 'app_replies_index', '_controller' => 'App\\Controller\\RepliesController::index'], null, ['GET' => 0], null, true, false, null]],
         '/replies/new' => [[['_route' => 'app_replies_new', '_controller' => 'App\\Controller\\RepliesController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/threads' => [[['_route' => 'app_threads_index', '_controller' => 'App\\Controller\\ThreadsController::index'], null, ['GET' => 0], null, true, false, null]],
@@ -22,59 +24,77 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-                .'|/backend/threads/([^/]++)(?'
-                    .'|(*:35)'
-                    .'|/edit(*:47)'
-                    .'|(*:54)'
+                .'|/backend/t(?'
+                    .'|hreads/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:41)'
+                            .'|/edit(*:53)'
+                            .'|(*:60)'
+                        .')'
+                        .'|delete/([^/]++)(*:83)'
+                    .')'
+                    .'|opics/(?'
+                        .'|([^/]++)(?'
+                            .'|(*:111)'
+                            .'|/edit(*:124)'
+                            .'|(*:132)'
+                        .')'
+                        .'|backend/topics/delete/([^/]++)(*:171)'
+                    .')'
                 .')'
                 .'|/replies/([^/]++)(?'
-                    .'|(*:82)'
-                    .'|/edit(*:94)'
-                    .'|(*:101)'
+                    .'|(*:201)'
+                    .'|/edit(*:214)'
+                    .'|(*:222)'
                 .')'
                 .'|/threads/([^/]++)(?'
-                    .'|(*:130)'
+                    .'|(*:251)'
                     .'|/(?'
-                        .'|edit(*:146)'
-                        .'|([^/]++)(*:162)'
+                        .'|edit(*:267)'
+                        .'|([^/]++)(*:283)'
                     .')'
-                    .'|(*:171)'
+                    .'|(*:292)'
                 .')'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:211)'
-                    .'|wdt/([^/]++)(*:231)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:332)'
+                    .'|wdt/([^/]++)(*:352)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:277)'
-                            .'|router(*:291)'
+                            .'|search/results(*:398)'
+                            .'|router(*:412)'
                             .'|exception(?'
-                                .'|(*:311)'
-                                .'|\\.css(*:324)'
+                                .'|(*:432)'
+                                .'|\\.css(*:445)'
                             .')'
                         .')'
-                        .'|(*:334)'
+                        .'|(*:455)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        35 => [[['_route' => 'app_backend_threads_show', '_controller' => 'App\\Controller\\BackendThreadsController::show'], ['threadId'], ['GET' => 0], null, false, true, null]],
-        47 => [[['_route' => 'app_backend_threads_edit', '_controller' => 'App\\Controller\\BackendThreadsController::edit'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        54 => [[['_route' => 'app_backend_threads_delete', '_controller' => 'App\\Controller\\BackendThreadsController::delete'], ['threadId'], ['POST' => 0], null, false, true, null]],
-        82 => [[['_route' => 'app_replies_show', '_controller' => 'App\\Controller\\RepliesController::show'], ['replyId'], ['GET' => 0], null, false, true, null]],
-        94 => [[['_route' => 'app_replies_edit', '_controller' => 'App\\Controller\\RepliesController::edit'], ['replyId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        101 => [[['_route' => 'app_replies_delete', '_controller' => 'App\\Controller\\RepliesController::delete'], ['replyId'], ['POST' => 0], null, false, true, null]],
-        130 => [[['_route' => 'threads_show', '_controller' => 'App\\Controller\\ThreadsController::showThreads'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        146 => [[['_route' => 'app_threads_edit', '_controller' => 'App\\Controller\\ThreadsController::edit'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        162 => [[['_route' => 'front_reply_delete', '_controller' => 'App\\Controller\\ThreadsController::deleteR'], ['threadId', 'replyId'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        171 => [[['_route' => 'app_threads_delete', '_controller' => 'App\\Controller\\ThreadsController::delete'], ['threadId'], ['POST' => 0], null, false, true, null]],
-        211 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        231 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        277 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        291 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        311 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        324 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        334 => [
+        41 => [[['_route' => 'app_backend_threads_show', '_controller' => 'App\\Controller\\BackendThreadsController::show'], ['threadId'], ['GET' => 0], null, false, true, null]],
+        53 => [[['_route' => 'app_backend_threads_edit', '_controller' => 'App\\Controller\\BackendThreadsController::edit'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        60 => [[['_route' => 'app_backend_threads_delete', '_controller' => 'App\\Controller\\BackendThreadsController::delete'], ['threadId'], ['POST' => 0], null, false, true, null]],
+        83 => [[['_route' => 'thread_delete', '_controller' => 'App\\Controller\\BackendThreadsController::deleteAuthor'], ['id'], null, null, false, true, null]],
+        111 => [[['_route' => 'app_backend_topics_show', '_controller' => 'App\\Controller\\BackendTopicsController::show'], ['categoryId'], ['GET' => 0], null, false, true, null]],
+        124 => [[['_route' => 'app_backend_topics_edit', '_controller' => 'App\\Controller\\BackendTopicsController::edit'], ['categoryId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        132 => [[['_route' => 'app_backend_topics_delete', '_controller' => 'App\\Controller\\BackendTopicsController::delete'], ['categoryId'], ['POST' => 0], null, false, true, null]],
+        171 => [[['_route' => 'topic_delete', '_controller' => 'App\\Controller\\BackendTopicsController::deleteTopic'], ['id'], null, null, false, true, null]],
+        201 => [[['_route' => 'app_replies_show', '_controller' => 'App\\Controller\\RepliesController::show'], ['replyId'], ['GET' => 0], null, false, true, null]],
+        214 => [[['_route' => 'app_replies_edit', '_controller' => 'App\\Controller\\RepliesController::edit'], ['replyId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        222 => [[['_route' => 'app_replies_delete', '_controller' => 'App\\Controller\\RepliesController::delete'], ['replyId'], ['POST' => 0], null, false, true, null]],
+        251 => [[['_route' => 'threads_show', '_controller' => 'App\\Controller\\ThreadsController::showThreads'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        267 => [[['_route' => 'app_threads_edit', '_controller' => 'App\\Controller\\ThreadsController::edit'], ['threadId'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        283 => [[['_route' => 'front_reply_delete', '_controller' => 'App\\Controller\\ThreadsController::deleteR'], ['threadId', 'replyId'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        292 => [[['_route' => 'app_threads_delete', '_controller' => 'App\\Controller\\ThreadsController::delete'], ['threadId'], ['POST' => 0], null, false, true, null]],
+        332 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        352 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        398 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        412 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        432 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        445 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        455 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

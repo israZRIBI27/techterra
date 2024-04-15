@@ -87,6 +87,8 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
         // line 6
         echo "    <h1>Threads index</h1>
 
+    <div class=\"card p-1\">
+
     <table class=\"table\">
         <thead>
             <tr>
@@ -100,50 +102,52 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
         </thead>
         <tbody>
         ";
-        // line 20
+        // line 22
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["threads"]) || array_key_exists("threads", $context) ? $context["threads"] : (function () { throw new RuntimeError('Variable "threads" does not exist.', 20, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["threads"]) || array_key_exists("threads", $context) ? $context["threads"] : (function () { throw new RuntimeError('Variable "threads" does not exist.', 22, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["thread"]) {
-            // line 21
+            // line 23
             echo "            <tr>
                 <td>";
-            // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 22), "html", null, true);
+            // line 24
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 24), "html", null, true);
             echo "</td>
                 <td>";
-            // line 23
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "user", [], "any", false, false, false, 23), "html", null, true);
+            // line 25
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "user", [], "any", false, false, false, 25), "html", null, true);
             echo "</td>
 
                 <td>";
-            // line 25
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "title", [], "any", false, false, false, 25), "html", null, true);
-            echo "</td>
-                <td>";
-            // line 26
-            echo twig_escape_filter($this->env, (twig_striptags(twig_slice($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "content", [], "any", false, false, false, 26), 0, 100)) . "..."), "html", null, true);
-            echo "</td>
-                <td>";
             // line 27
-            ((twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 27)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 27), "Y-m-d H:i:s"), "html", null, true))) : (print ("")));
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "title", [], "any", false, false, false, 27), "html", null, true);
+            echo "</td>
+                <td>";
+            // line 28
+            echo twig_escape_filter($this->env, (twig_striptags(twig_slice($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "content", [], "any", false, false, false, 28), 0, 100)) . "..."), "html", null, true);
+            echo "</td>
+                <td>";
+            // line 29
+            ((twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 29)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 29), "Y-m-d H:i:s"), "html", null, true))) : (print ("")));
             echo "</td>
                 <td>
-                    <a href=\"";
-            // line 29
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_backend_threads_show", ["threadId" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 29)]), "html", null, true);
+                    <a target=\"_blank\" href=\"";
+            // line 31
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("threads_show", ["threadId" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 31)]), "html", null, true);
             echo "\">show</a>
-                    <a href=\"";
-            // line 30
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_backend_threads_edit", ["threadId" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 30)]), "html", null, true);
-            echo "\">edit</a>
+                    |
+                    <a class=\"btn btn-danger\" href =\"";
+            // line 33
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("thread_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 33)]), "html", null, true);
+            echo "\">Delete</a>
+
                 </td>
             </tr>
         ";
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 34
+            // line 38
             echo "            <tr>
                 <td colspan=\"5\">no records found</td>
             </tr>
@@ -152,14 +156,17 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['thread'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 38
+        // line 42
         echo "        </tbody>
     </table>
 
-    <a href=\"";
-        // line 41
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_backend_threads_new");
+    </div>
+
+    <a class=\"btn btn-primary\" href=\"";
+        // line 47
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_new");
         echo "\">Create new</a>
+
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -190,7 +197,7 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
      */
     public function getDebugInfo()
     {
-        return array (  161 => 41,  156 => 38,  147 => 34,  138 => 30,  134 => 29,  129 => 27,  125 => 26,  121 => 25,  116 => 23,  112 => 22,  109 => 21,  104 => 20,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  167 => 47,  160 => 42,  151 => 38,  141 => 33,  136 => 31,  131 => 29,  127 => 28,  123 => 27,  118 => 25,  114 => 24,  111 => 23,  106 => 22,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -201,6 +208,8 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
 
 {% block body %}
     <h1>Threads index</h1>
+
+    <div class=\"card p-1\">
 
     <table class=\"table\">
         <thead>
@@ -223,8 +232,10 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
                 <td>{{ thread.content |slice(0, 100)|striptags ~ '...' }}</td>
                 <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href=\"{{ path('app_backend_threads_show', {'threadId': thread.threadId}) }}\">show</a>
-                    <a href=\"{{ path('app_backend_threads_edit', {'threadId': thread.threadId}) }}\">edit</a>
+                    <a target=\"_blank\" href=\"{{ path('threads_show', {'threadId': thread.threadId}) }}\">show</a>
+                    |
+                    <a class=\"btn btn-danger\" href =\"{{path('thread_delete',{'id':thread.threadId})}}\">Delete</a>
+
                 </td>
             </tr>
         {% else %}
@@ -235,7 +246,10 @@ class __TwigTemplate_9b6e17a6b4e1fc68819134e5208c172d extends Template
         </tbody>
     </table>
 
-    <a href=\"{{ path('app_backend_threads_new') }}\">Create new</a>
+    </div>
+
+    <a class=\"btn btn-primary\" href=\"{{ path('app_threads_new') }}\">Create new</a>
+
 {% endblock %}
 ", "backend/threads/index.html.twig", "C:\\Users\\Med\\Downloads\\techterra-Gestion-Evenement\\techterra-Gestion-Evenement\\templates\\backend\\threads\\index.html.twig");
     }

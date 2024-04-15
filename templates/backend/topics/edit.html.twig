@@ -1,0 +1,13 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Edit Topics{% endblock %}
+
+{% block body %}
+    <h1>Edit Topics</h1>
+
+    {{ include('backend/topics/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_backend_topics_index') }}">back to list</a>
+
+    {{ include('backend/topics/_delete_form.html.twig') }}
+{% endblock %}

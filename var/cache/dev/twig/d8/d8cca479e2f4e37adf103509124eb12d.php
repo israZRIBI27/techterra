@@ -129,14 +129,27 @@ class __TwigTemplate_50af92da8521cdfc8dbeb356bd9a7868 extends Template
                 echo "                                </p>
                             </div>
                             <div class=\"card-footer text-muted\">
-                                <p>CreatedAt: ";
-                // line 25
-                ((twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 25)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 25), "Y-m-d H:i:s"), "html", null, true))) : (print ("")));
-                echo "</p>
                                 <a href=\"";
-                // line 26
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_edit", ["threadId" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 26)]), "html", null, true);
+                // line 25
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_edit", ["threadId" => twig_get_attribute($this->env, $this->source, $context["thread"], "threadId", [], "any", false, false, false, 25)]), "html", null, true);
                 echo "\" class=\"btn btn-secondary\">Edit</a>
+                                <p class=\"text-light\" style=\"    background: #45835f;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display:inline;\">";
+                // line 26
+                ((twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 26)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "createdAt", [], "any", false, false, false, 26), "Y-m-d"), "html", null, true))) : (print ("")));
+                echo "</p>
+                                ";
+                // line 27
+                if ( !(null === twig_get_attribute($this->env, $this->source, $context["thread"], "category", [], "any", false, false, false, 27))) {
+                    // line 28
+                    echo "
+                                <p class=\"text-light\" style=\"    background: #e0895b;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display: inline\">";
+                    // line 29
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["thread"], "category", [], "any", false, false, false, 29), "html", null, true);
+                    echo "</p>
+                                ";
+                }
+                // line 31
+                echo "
                             </div>
                         </div>
                     </div>
@@ -144,7 +157,7 @@ class __TwigTemplate_50af92da8521cdfc8dbeb356bd9a7868 extends Template
                 $context['_iterated'] = true;
             }
             if (!$context['_iterated']) {
-                // line 31
+                // line 36
                 echo "                    <div class=\"col\">
                         <div class=\"card h-100\">
                             <div class=\"card-body\">
@@ -157,18 +170,18 @@ class __TwigTemplate_50af92da8521cdfc8dbeb356bd9a7868 extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['thread'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 39
+            // line 44
             echo "            </div>
         ";
         } else {
-            // line 41
+            // line 46
             echo "            <p>No threads found.</p>
         ";
         }
-        // line 43
+        // line 48
         echo "
         <a href=\"";
-        // line 44
+        // line 49
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_new");
         echo "\" class=\"btn btn-success mt-4\">Create New Thread</a>
     </div>
@@ -202,7 +215,7 @@ class __TwigTemplate_50af92da8521cdfc8dbeb356bd9a7868 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  172 => 44,  169 => 43,  165 => 41,  161 => 39,  148 => 31,  138 => 26,  134 => 25,  129 => 22,  123 => 20,  117 => 18,  115 => 17,  108 => 15,  103 => 12,  98 => 11,  95 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  185 => 49,  182 => 48,  178 => 46,  174 => 44,  161 => 36,  152 => 31,  147 => 29,  144 => 28,  142 => 27,  138 => 26,  134 => 25,  129 => 22,  123 => 20,  117 => 18,  115 => 17,  108 => 15,  103 => 12,  98 => 11,  95 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -231,8 +244,13 @@ class __TwigTemplate_50af92da8521cdfc8dbeb356bd9a7868 extends Template
                                 </p>
                             </div>
                             <div class=\"card-footer text-muted\">
-                                <p>CreatedAt: {{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</p>
                                 <a href=\"{{ path('app_threads_edit', {'threadId': thread.threadId}) }}\" class=\"btn btn-secondary\">Edit</a>
+                                <p class=\"text-light\" style=\"    background: #45835f;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display:inline;\">{{ thread.createdAt ? thread.createdAt|date('Y-m-d') : '' }}</p>
+                                {% if thread.category is not null %}
+
+                                <p class=\"text-light\" style=\"    background: #e0895b;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display: inline\">{{thread.category}}</p>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>

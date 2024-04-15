@@ -5,6 +5,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\RepliesRepository;
 use App\Entity\Threads; // Import the Threads entity
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: RepliesRepository::class)]
 class Replies
@@ -24,7 +26,7 @@ class Replies
     #[ORM\JoinColumn(referencedColumnName: "user_id")]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: Threads::class, inversedBy: "replies")] // Updated the inversedBy value
+    #[ORM\ManyToOne(targetEntity: Threads::class, inversedBy: "replies")]
     #[ORM\JoinColumn(name: "threads_id", referencedColumnName: "thread_id", nullable: false)]
     private $threads;
 

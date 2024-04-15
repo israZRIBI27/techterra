@@ -6,6 +6,7 @@ use App\Entity\Threads;
 use App\Form\Threads1Type;
 use App\Repository\ThreadsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,5 +78,17 @@ class BackendThreadsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_backend_threads_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+    #[Route('/delete/{id}', name: 'thread_delete')]
+    public function deleteAuthor($id, ThreadsRepository $rep, ManagerRegistry $doctrine): Response
+    {
+        $em= $doctrine->getManager();
+        $thread= $rep->find($id);
+        $em->remove($thread);
+        $em->flush();
+        return $this-> redirectToRoute('app_backend_threads_index');
     }
 }

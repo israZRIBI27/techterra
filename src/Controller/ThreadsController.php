@@ -3,29 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Votes;
-use App\Form\Replies1Type;
 use App\Form\VotesType;
-use Cassandra\Date;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\VarDumper\VarDumper;
 use App\Entity\Replies;
 use App\Entity\Threads;
 use App\Entity\User;
 use App\Form\ThreadsType;
 use App\Form\RepliesType;
 use App\Repository\ThreadsRepository;
-use App\Repository\VotesRepository;
-use App\Repository\RepliesRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route('/threads')]
 class ThreadsController extends AbstractController
@@ -73,7 +63,7 @@ class ThreadsController extends AbstractController
     }
 
     #[Route('/{threadId}', name: 'threads_show',  methods: ['GET', 'POST'])]
-    public function showThreads(Request $request, Threads $thread, LoggerInterface $logger, EntityManagerInterface $entityManager): Response
+    public function showThreads(Request $request, Threads $thread, EntityManagerInterface $entityManager): Response
     {
         $reply = new Replies();
         $reply->setUser($this->user);
@@ -85,10 +75,11 @@ class ThreadsController extends AbstractController
 
         $commentForm->handleRequest($request);
 
-        if ($commentForm->isSubmitted()) {
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $entityManager->persist($reply);
             $entityManager->flush();
-            $this->addFlash('message', 'Votre commentaire a bien été envoyé');
+            return $this->redirect($request->getUri());
+            //$this->addFlash('message', 'Votre commentaire a bien été envoyé');
             //return $this->redirectToRoute('threads_show', ['slug' => $thread->getThreadId()]);
         }
 

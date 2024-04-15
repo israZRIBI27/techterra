@@ -440,14 +440,20 @@ class __TwigTemplate_a1f4a9ab49036579345fba16ce697889 extends Template
                                 class=\"nav-text\">Widget</span></a></li>
                 <li class=\"nav-label\">Forms</li>
                 <li><a class=\"has-arrow\" href=\"javascript:void()\" aria-expanded=\"false\"><i
-                                class=\"icon icon-form\"></i><span class=\"nav-text\">Forms</span></a>
-                    <ul aria-expanded=\"false\">
-                        <li><a href=\"./form-element.html\">Form Elements</a></li>
-                        <li><a href=\"./form-wizard.html\">Wizard</a></li>
-                        <li><a href=\"./form-editor-summernote.html\">Summernote</a></li>
-                        <li><a href=\"form-pickers.html\">Pickers</a></li>
-                        <li><a href=\"form-validation-jquery.html\">Jquery Validate</a></li>
-                    </ul>
+                                class=\"icon icon-form\"></i><span class=\"nav-text\">Form</span></a>
+                        <ul aria-expanded=\"false\">
+                            <li><a href=\"";
+        // line 260
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_backend_threads_index");
+        echo "\">Threads</a></li>
+                            <li><a href=\"";
+        // line 261
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_backend_topics_index");
+        echo "\">Topics</a></li>
+                            <li><a href=\"./form-editor-summernote.html\">Summernote</a></li>
+                            <li><a href=\"form-pickers.html\">Pickers</a></li>
+                            <li><a href=\"form-validation-jquery.html\">Jquery Validate</a></li>
+                        </ul>
                 </li>
                 <li class=\"nav-label\">Table</li>
                 <li><a class=\"has-arrow\" href=\"javascript:void()\" aria-expanded=\"false\"><i
@@ -1193,7 +1199,7 @@ class __TwigTemplate_a1f4a9ab49036579345fba16ce697889 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  1160 => 963,  1155 => 961,  1151 => 960,  1146 => 958,  1141 => 956,  1137 => 955,  1133 => 954,  1128 => 951,  1118 => 950,  505 => 308,  495 => 307,  359 => 174,  349 => 173,  336 => 17,  332 => 16,  327 => 15,  317 => 14,  299 => 10,  286 => 969,  284 => 950,  244 => 912,  242 => 307,  234 => 301,  232 => 173,  108 => 52,  104 => 51,  100 => 50,  68 => 20,  66 => 14,  59 => 10,  48 => 1,);
+        return array (  1166 => 963,  1161 => 961,  1157 => 960,  1152 => 958,  1147 => 956,  1143 => 955,  1139 => 954,  1134 => 951,  1124 => 950,  511 => 308,  501 => 307,  451 => 261,  447 => 260,  359 => 174,  349 => 173,  336 => 17,  332 => 16,  327 => 15,  317 => 14,  299 => 10,  286 => 969,  284 => 950,  244 => 912,  242 => 307,  234 => 301,  232 => 173,  108 => 52,  104 => 51,  100 => 50,  68 => 20,  66 => 14,  59 => 10,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -1455,14 +1461,14 @@ class __TwigTemplate_a1f4a9ab49036579345fba16ce697889 extends Template
                                 class=\"nav-text\">Widget</span></a></li>
                 <li class=\"nav-label\">Forms</li>
                 <li><a class=\"has-arrow\" href=\"javascript:void()\" aria-expanded=\"false\"><i
-                                class=\"icon icon-form\"></i><span class=\"nav-text\">Forms</span></a>
-                    <ul aria-expanded=\"false\">
-                        <li><a href=\"./form-element.html\">Form Elements</a></li>
-                        <li><a href=\"./form-wizard.html\">Wizard</a></li>
-                        <li><a href=\"./form-editor-summernote.html\">Summernote</a></li>
-                        <li><a href=\"form-pickers.html\">Pickers</a></li>
-                        <li><a href=\"form-validation-jquery.html\">Jquery Validate</a></li>
-                    </ul>
+                                class=\"icon icon-form\"></i><span class=\"nav-text\">Form</span></a>
+                        <ul aria-expanded=\"false\">
+                            <li><a href=\"{{ path('app_backend_threads_index') }}\">Threads</a></li>
+                            <li><a href=\"{{ path('app_backend_topics_index') }}\">Topics</a></li>
+                            <li><a href=\"./form-editor-summernote.html\">Summernote</a></li>
+                            <li><a href=\"form-pickers.html\">Pickers</a></li>
+                            <li><a href=\"form-validation-jquery.html\">Jquery Validate</a></li>
+                        </ul>
                 </li>
                 <li class=\"nav-label\">Table</li>
                 <li><a class=\"has-arrow\" href=\"javascript:void()\" aria-expanded=\"false\"><i

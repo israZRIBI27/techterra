@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Threads index</h1>
 
+    <div class="card p-1">
+
     <table class="table">
         <thead>
             <tr>
@@ -26,8 +28,10 @@
                 <td>{{ thread.content |slice(0, 100)|striptags ~ '...' }}</td>
                 <td>{{ thread.createdAt ? thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_backend_threads_show', {'threadId': thread.threadId}) }}">show</a>
-                    <a href="{{ path('app_backend_threads_edit', {'threadId': thread.threadId}) }}">edit</a>
+                    <a target="_blank" href="{{ path('threads_show', {'threadId': thread.threadId}) }}">show</a>
+                    |
+                    <a class="btn btn-danger" href ="{{path('thread_delete',{'id':thread.threadId})}}">Delete</a>
+
                 </td>
             </tr>
         {% else %}
@@ -38,5 +42,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_backend_threads_new') }}">Create new</a>
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('app_threads_new') }}">Create new</a>
+
 {% endblock %}

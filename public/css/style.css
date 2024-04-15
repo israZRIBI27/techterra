@@ -538,7 +538,3 @@ h6,
     padding-right: 0;
     border-right: none;
 }
-
-.sticky-top{
-    background: var(--bs-gray);
-}

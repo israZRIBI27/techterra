@@ -24,12 +24,16 @@ class __TwigTemplate_e5b5450c96afb318e26cb9e3b072f14e extends Template
 
         $this->source = $this->getSourceContext();
 
-        $this->parent = false;
-
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
         ];
+    }
+
+    protected function doGetParent(array $context)
+    {
+        // line 1
+        return "backendbase.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = [])
@@ -41,17 +45,8 @@ class __TwigTemplate_e5b5450c96afb318e26cb9e3b072f14e extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "backend/threads/edit.html.twig"));
 
-        // line 1
-        echo "
-
-";
-        // line 3
-        $this->displayBlock('title', $context, $blocks);
-        // line 4
-        echo "
-";
-        // line 5
-        $this->displayBlock('body', $context, $blocks);
+        $this->parent = $this->loadTemplate("backendbase.html.twig", "backend/threads/edit.html.twig", 1);
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -126,14 +121,22 @@ class __TwigTemplate_e5b5450c96afb318e26cb9e3b072f14e extends Template
     /**
      * @codeCoverageIgnore
      */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
     public function getDebugInfo()
     {
-        return array (  107 => 12,  102 => 10,  97 => 8,  93 => 6,  83 => 5,  64 => 3,  54 => 5,  51 => 4,  49 => 3,  45 => 1,);
+        return array (  102 => 12,  97 => 10,  92 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("
+        return new Source("{% extends 'backendbase.html.twig' %}
 
 {% block title %}Edit Threads{% endblock %}
 
@@ -145,7 +148,6 @@ class __TwigTemplate_e5b5450c96afb318e26cb9e3b072f14e extends Template
     <a href=\"{{ path('app_backend_threads_index') }}\">back to list</a>
 
     {{ include('threads/_delete_form.html.twig') }}
-{% endblock %}
-", "backend/threads/edit.html.twig", "C:\\Users\\Med\\Downloads\\techterra-Gestion-Evenement\\techterra-Gestion-Evenement\\templates\\backend\\threads\\edit.html.twig");
+{% endblock %}", "backend/threads/edit.html.twig", "C:\\Users\\Med\\Downloads\\techterra-Gestion-Evenement\\techterra-Gestion-Evenement\\templates\\backend\\threads\\edit.html.twig");
     }
 }

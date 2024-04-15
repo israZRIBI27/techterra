@@ -16,6 +16,8 @@ class Topics
     #[ORM\Column(type: "string", length: 255)]
     private string $categoryName;
 
+    #[ORM\OneToMany(mappedBy: "category", targetEntity: Threads::class, cascade: ["remove"])]
+    private $threads;
 
     public function getCategoryId(): ?int
     {

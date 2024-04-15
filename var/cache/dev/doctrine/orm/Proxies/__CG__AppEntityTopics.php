@@ -67,10 +67,10 @@ class Topics extends \App\Entity\Topics implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryId', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryName'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryId', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryName', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'threads'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryId', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryName'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryId', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'categoryName', '' . "\0" . 'App\\Entity\\Topics' . "\0" . 'threads'];
     }
 
     /**

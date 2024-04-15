@@ -88,48 +88,63 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
         echo "    <div class=\"container\">
         <div class=\"row\">
             <div class=\"col-md-8 offset-md-2\">
-                <div class=\"card mt-5\">
+                ";
+        // line 9
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 9, $this->source); })()), "content", [], "any", false, false, false, 9), 'errors')) {
+            // line 10
+            echo "                    <div class=\"alert alert-danger\">
+                        <p> ";
+            // line 11
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 11, $this->source); })()), "content", [], "any", false, false, false, 11), 'errors');
+            echo "</p>
+                    </div>
+                ";
+        }
+        // line 14
+        echo "                <div class=\"card mt-5\">
+
                     <div class=\"card-header\">
+
 
                         <div class=\"row\">
                             <div class=\"col-auto\">
 
                         ";
-        // line 15
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 15, $this->source); })()), 'form_start');
+        // line 22
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 22, $this->source); })()), 'form_start');
         echo "
                         ";
-        // line 16
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 16, $this->source); })()), "user", [], "any", false, false, false, 16), 'widget', ["attr" => ["style" => "display:none;"]]);
+        // line 23
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 23, $this->source); })()), "user", [], "any", false, false, false, 23), 'widget', ["attr" => ["style" => "display:none;"]]);
         echo "
                         ";
-        // line 17
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 17, $this->source); })()), "threads", [], "any", false, false, false, 17), 'widget', ["attr" => ["style" => "display:none;"]]);
+        // line 24
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 24, $this->source); })()), "threads", [], "any", false, false, false, 24), 'widget', ["attr" => ["style" => "display:none;"]]);
         echo "
                         <input type=\"hidden\" id=\"voteType\" name=\"voteType\" value=\"\">
                         <button type=\"submit\" id=\"submit-btn\" style=\"display: none;\">Vote</button>
                         ";
-        // line 20
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 20, $this->source); })()), 'form_end');
+        // line 27
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["voteForm"]) || array_key_exists("voteForm", $context) ? $context["voteForm"] : (function () { throw new RuntimeError('Variable "voteForm" does not exist.', 27, $this->source); })()), 'form_end');
         echo "
 
                             </div>
                             <div class=\"col\">
 
                         <h2 class=\"card-title\">";
-        // line 25
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 25, $this->source); })()), "title", [], "any", false, false, false, 25), "html", null, true);
+        // line 32
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 32, $this->source); })()), "title", [], "any", false, false, false, 32), "html", null, true);
         echo "</h2>
                                 <hr>
                                 <div class=\"d-flex justify-content-between\">
                                     <p>";
-        // line 28
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 28, $this->source); })()), "countVotesAsString", [], "method", false, false, false, 28), "html", null, true);
+        // line 35
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 35, $this->source); })()), "countVotesAsString", [], "method", false, false, false, 35), "html", null, true);
         echo "</p>
 
                                     <p class=\"card-text text-muted\">";
-        // line 30
-        ((twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 30, $this->source); })()), "createdAt", [], "any", false, false, false, 30)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 30, $this->source); })()), "createdAt", [], "any", false, false, false, 30), "Y-m-d H:i"), "html", null, true))) : (print ("")));
+        // line 37
+        ((twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 37, $this->source); })()), "createdAt", [], "any", false, false, false, 37)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 37, $this->source); })()), "createdAt", [], "any", false, false, false, 37), "Y-m-d H:i"), "html", null, true))) : (print ("")));
         echo "</p>
 
                                 </div>
@@ -142,21 +157,21 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
                     </div>
                     <div class=\"card-body\">
                         <p class=\"card-text\">";
-        // line 41
-        echo twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 41, $this->source); })()), "content", [], "any", false, false, false, 41);
+        // line 48
+        echo twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 48, $this->source); })()), "content", [], "any", false, false, false, 48);
         echo "</p>
                     </div>
                     <div class=\"card-footer\">
                         <a href=\"";
-        // line 44
+        // line 51
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_index");
         echo "\" class=\"btn btn-secondary\"><i class=\"bi bi-arrow-left\"></i> Back to List</a>
                         <a href=\"";
-        // line 45
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_edit", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 45, $this->source); })()), "threadId", [], "any", false, false, false, 45)]), "html", null, true);
+        // line 52
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_threads_edit", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 52, $this->source); })()), "threadId", [], "any", false, false, false, 52)]), "html", null, true);
         echo "\" class=\"btn btn-primary\"><i class=\"bi bi-pencil\"></i> Edit</a>
                         ";
-        // line 46
+        // line 53
         echo twig_include($this->env, $context, "threads/_delete_form.html.twig");
         echo "
                     </div>
@@ -190,51 +205,51 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
                     </div>
                     <div class=\"card-body\">
                         ";
-        // line 77
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 77, $this->source); })()), 'form_start', ["attr" => ["id" => "comment-form"]]);
+        // line 84
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 84, $this->source); })()), 'form_start', ["attr" => ["id" => "comment-form"]]);
         echo "
                         ";
-        // line 78
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 78, $this->source); })()), "content", [], "any", false, false, false, 78), 'widget');
+        // line 85
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 85, $this->source); })()), "content", [], "any", false, false, false, 85), 'widget');
         echo "
                         ";
-        // line 79
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 79, $this->source); })()), "createdAt", [], "any", false, false, false, 79), 'widget', ["attr" => ["style" => "display:none;"]]);
+        // line 86
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 86, $this->source); })()), "createdAt", [], "any", false, false, false, 86), 'widget', ["attr" => ["style" => "display:none;"]]);
         echo "
                         ";
-        // line 80
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 80, $this->source); })()), "user", [], "any", false, false, false, 80), 'widget', ["attr" => ["style" => "display:none;"]]);
+        // line 87
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 87, $this->source); })()), "user", [], "any", false, false, false, 87), 'widget', ["attr" => ["style" => "display:none;"]]);
         echo "
                         ";
-        // line 81
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 81, $this->source); })()), "threads", [], "any", false, false, false, 81), 'widget', ["attr" => ["style" => "display:none;"]]);
+        // line 88
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 88, $this->source); })()), "threads", [], "any", false, false, false, 88), 'widget', ["attr" => ["style" => "display:none;"]]);
         echo "
 
                         ";
-        // line 83
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 83, $this->source); })()), "envoyer", [], "any", false, false, false, 83), 'widget', ["attr" => ["class" => "btn btn-primary mt-3"]]);
+        // line 90
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 90, $this->source); })()), "envoyer", [], "any", false, false, false, 90), 'widget', ["attr" => ["class" => "btn btn-primary mt-3"]]);
         echo "
                         ";
-        // line 84
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 84, $this->source); })()), 'form_end');
+        // line 91
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["commentForm"]) || array_key_exists("commentForm", $context) ? $context["commentForm"] : (function () { throw new RuntimeError('Variable "commentForm" does not exist.', 91, $this->source); })()), 'form_end');
         echo "
                     </div>
                 </div>
                 <hr>
                 <h3 class=\"mt-5\">Comments</h3>
                 ";
-        // line 89
+        // line 96
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 89, $this->source); })()), "replies", [], "any", false, false, false, 89));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 96, $this->source); })()), "replies", [], "any", false, false, false, 96));
         foreach ($context['_seq'] as $context["_key"] => $context["comment"]) {
-            // line 90
+            // line 97
             echo "                    <div class=\"card mt-3\">
 
                         <div class=\"card-header\" style=\"display: flex;align-items: center;justify-content: space-between;\">
                             <span><i class=\"bi bi-person me-1\"></i>
                                 ";
-            // line 94
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "user", [], "any", false, false, false, 94), "html", null, true);
+            // line 101
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "user", [], "any", false, false, false, 101), "html", null, true);
             echo "
                             </span>
 
@@ -243,25 +258,25 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
                                <i class=\"bi bi-clock me-1\"></i>
 
                                 ";
-            // line 101
-            ((twig_get_attribute($this->env, $this->source, $context["comment"], "createdAt", [], "any", false, false, false, 101)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "createdAt", [], "any", false, false, false, 101), "Y-m-d H:i"), "html", null, true))) : (print ("")));
+            // line 108
+            ((twig_get_attribute($this->env, $this->source, $context["comment"], "createdAt", [], "any", false, false, false, 108)) ? (print (twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "createdAt", [], "any", false, false, false, 108), "Y-m-d H:i"), "html", null, true))) : (print ("")));
             echo "
 <a href=\"";
-            // line 102
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("front_reply_delete", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 102, $this->source); })()), "threadId", [], "any", false, false, false, 102), "replyId" => twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 102)]), "html", null, true);
+            // line 109
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("front_reply_delete", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 109, $this->source); })()), "threadId", [], "any", false, false, false, 109), "replyId" => twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 109)]), "html", null, true);
             echo "\" class=\"btn btn-danger ms-2\" onclick=\"event.preventDefault(); document.getElementById('delete-form-";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 102), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 109), "html", null, true);
             echo "').submit();\"><i class=\"bi bi-trash\"></i></a>
 
 <form id=\"delete-form-";
-            // line 104
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 104), "html", null, true);
+            // line 111
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 111), "html", null, true);
             echo "\" action=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("front_reply_delete", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 104, $this->source); })()), "threadId", [], "any", false, false, false, 104), "replyId" => twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 104)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("front_reply_delete", ["threadId" => twig_get_attribute($this->env, $this->source, (isset($context["thread"]) || array_key_exists("thread", $context) ? $context["thread"] : (function () { throw new RuntimeError('Variable "thread" does not exist.', 111, $this->source); })()), "threadId", [], "any", false, false, false, 111), "replyId" => twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 111)]), "html", null, true);
             echo "\" method=\"POST\" style=\"display: none;\">
     <input type=\"hidden\" name=\"_token\" value=\"";
-            // line 105
-            echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 105))), "html", null, true);
+            // line 112
+            echo twig_escape_filter($this->env, $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken(("delete" . twig_get_attribute($this->env, $this->source, $context["comment"], "replyId", [], "any", false, false, false, 112))), "html", null, true);
             echo "\">
 </form>                            </span>
 
@@ -269,8 +284,8 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
 
                         <div class=\"card-body\">
                             <p class=\"card-text\">";
-            // line 111
-            echo twig_get_attribute($this->env, $this->source, $context["comment"], "content", [], "any", false, false, false, 111);
+            // line 118
+            echo twig_get_attribute($this->env, $this->source, $context["comment"], "content", [], "any", false, false, false, 118);
             echo "</p>
                         </div>
                     </div>
@@ -279,7 +294,7 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['comment'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 115
+        // line 122
         echo "            </div>
         </div>
     </div>
@@ -313,7 +328,7 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  283 => 115,  273 => 111,  264 => 105,  258 => 104,  251 => 102,  247 => 101,  237 => 94,  231 => 90,  227 => 89,  219 => 84,  215 => 83,  210 => 81,  206 => 80,  202 => 79,  198 => 78,  194 => 77,  160 => 46,  156 => 45,  152 => 44,  146 => 41,  132 => 30,  127 => 28,  121 => 25,  113 => 20,  107 => 17,  103 => 16,  99 => 15,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  298 => 122,  288 => 118,  279 => 112,  273 => 111,  266 => 109,  262 => 108,  252 => 101,  246 => 97,  242 => 96,  234 => 91,  230 => 90,  225 => 88,  221 => 87,  217 => 86,  213 => 85,  209 => 84,  175 => 53,  171 => 52,  167 => 51,  161 => 48,  147 => 37,  142 => 35,  136 => 32,  128 => 27,  122 => 24,  118 => 23,  114 => 22,  104 => 14,  98 => 11,  95 => 10,  93 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -326,8 +341,15 @@ class __TwigTemplate_13d5a7cd1760ca3b426c0fc98b365f05 extends Template
     <div class=\"container\">
         <div class=\"row\">
             <div class=\"col-md-8 offset-md-2\">
+                {% if form_errors(commentForm.content) %}
+                    <div class=\"alert alert-danger\">
+                        <p> {{ form_errors(commentForm.content) }}</p>
+                    </div>
+                {% endif %}
                 <div class=\"card mt-5\">
+
                     <div class=\"card-header\">
+
 
                         <div class=\"row\">
                             <div class=\"col-auto\">

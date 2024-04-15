@@ -294,7 +294,7 @@ class Threads extends \App\Entity\Threads implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setCategory(?\App\Entity\Topics $category): static
+    public function setCategory(?\App\Entity\Topics $category): \App\Entity\Threads
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCategory', [$category]);

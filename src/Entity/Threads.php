@@ -21,19 +21,17 @@ class Threads
     #[ORM\JoinColumn(referencedColumnName: "user_id")]
     private $user;
 
-
-
-    #[ORM\Column(type: "string", length: 255, nullable: false)]
+    #[ORM\Column(type: "string", length: 80, nullable: false)]
     private $title;
 
-    #[ORM\Column(type: "text", length: 65535, nullable: true)]
+    #[ORM\Column(type: "text", length: 65535, nullable: false)]
     private $content;
 
     #[ORM\Column(type: "datetime")]
     private $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: Topics::class)]
-    #[ORM\JoinColumn(referencedColumnName: "category_id")]
+    #[ORM\ManyToOne(targetEntity: Topics::class, cascade: ["remove"])]
+    #[ORM\JoinColumn(referencedColumnName: "category_id",nullable: true)]
     private $category;
 
     #[ORM\OneToMany(targetEntity: Replies::class, mappedBy: 'threads', orphanRemoval: true)]  // OneToMany relationship
@@ -106,7 +104,7 @@ class Threads
         return $this->category;
     }
 
-    public function setCategory(?Topics $category): static
+    public function setCategory(?Topics $category): self
     {
         $this->category = $category;
 
@@ -120,6 +118,7 @@ class Threads
     {
         return $this->replies;
     }
+
 
     public function addReply(Replies $reply): static
     {
@@ -142,6 +141,7 @@ class Threads
 
         return $this;
     }
+
 
     /**
      * @return Collection|Votes[]

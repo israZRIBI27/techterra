@@ -268,7 +268,10 @@ class __TwigTemplate_95e904ab9c244b57c151ee3b26189e32 extends Template
     <div class=\"container\">
         <nav class=\"navbar navbar-expand-lg navbar-dark p-0\">
             <a href=\"index.html\" class=\"navbar-brand\">
-                <h1 class=\"text-white\">AI<span class=\"text-dark\">.</span>Tech</h1>
+                <img width=\"200px\"src=\"";
+        // line 54
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("logo.png"), "html", null, true);
+        echo "\">
             </a>
             <button type=\"button\" class=\"navbar-toggler ms-auto me-0\" data-bs-toggle=\"collapse\"
                     data-bs-target=\"#navbarCollapse\">
@@ -963,7 +966,7 @@ class __TwigTemplate_95e904ab9c244b57c151ee3b26189e32 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  942 => 755,  936 => 752,  932 => 751,  928 => 750,  924 => 749,  920 => 748,  916 => 746,  906 => 745,  321 => 94,  311 => 93,  267 => 50,  257 => 49,  245 => 33,  239 => 30,  233 => 27,  229 => 26,  213 => 12,  203 => 11,  185 => 7,  174 => 757,  172 => 745,  95 => 670,  93 => 93,  83 => 85,  81 => 49,  65 => 35,  63 => 11,  56 => 7,  48 => 1,);
+        return array (  945 => 755,  939 => 752,  935 => 751,  931 => 750,  927 => 749,  923 => 748,  919 => 746,  909 => 745,  324 => 94,  314 => 93,  273 => 54,  267 => 50,  257 => 49,  245 => 33,  239 => 30,  233 => 27,  229 => 26,  213 => 12,  203 => 11,  185 => 7,  174 => 757,  172 => 745,  95 => 670,  93 => 93,  83 => 85,  81 => 49,  65 => 35,  63 => 11,  56 => 7,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -1021,7 +1024,7 @@ class __TwigTemplate_95e904ab9c244b57c151ee3b26189e32 extends Template
     <div class=\"container\">
         <nav class=\"navbar navbar-expand-lg navbar-dark p-0\">
             <a href=\"index.html\" class=\"navbar-brand\">
-                <h1 class=\"text-white\">AI<span class=\"text-dark\">.</span>Tech</h1>
+                <img width=\"200px\"src=\"{{ asset('logo.png') }}\">
             </a>
             <button type=\"button\" class=\"navbar-toggler ms-auto me-0\" data-bs-toggle=\"collapse\"
                     data-bs-target=\"#navbarCollapse\">
