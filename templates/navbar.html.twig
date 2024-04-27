@@ -78,11 +78,16 @@
 			<!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
 						                    </li> -->
 			<li>
-				<a class="has-arrow" aria-expanded="false" href="path('show_users')">
-					<i class="icon icon-single-04"></i>
-					User Management
-				</a>
-
+					{% for role in app.user.getRoles %}
+						{% if role == "ROLE_ADMIN" %}
+							<a class="has-arrow" aria-expanded="false" href="{{path('app_admin_userManagement')}}">
+							<i class="icon icon-single-04"></i>
+							User Management
+							</a>
+						{% endif %}
+						{% if not loop.last %},
+						{% endif %}
+					{% endfor %}
 			</li>
 
 

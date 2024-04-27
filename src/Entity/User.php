@@ -30,9 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = ['ROLE_USER'];
 
-    /**
-     * @var string The hashed password
-     */
+    
     #[ORM\Column]
     #[Assert\NotBlank(message: "Password is required")]
     #[Assert\Length(min: 8, minMessage: "Password must be at least {{ limit }} characters long")]

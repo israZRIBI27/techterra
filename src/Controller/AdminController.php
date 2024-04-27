@@ -9,6 +9,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
+
+
 
 class AdminController extends AbstractController
 {
@@ -20,12 +23,54 @@ class AdminController extends AbstractController
         ]);
     }
 
+   
+
     #[Route('/admin/userManagement', name: 'app_admin_userManagement')]
-    public function showUsers(UserRepository $rep): Response
+    public function show(UserRepository $rep, Request $request, PaginatorInterface $paginator): Response
     {
-        $users = $rep->findAll();
+        $query = $request->query->get('q');
+    
+        if ($query) {
+            $users = $rep->findBySearchQuery($query); // À implémenter dans ProductRepository
+        } else {
+            $users = $rep->findAll();
+        }
+    
+        $users = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            1
+        );
+    
         return $this->render('admin/user/userslist.html.twig', ['users'=>$users]);
+
     }
+
+
+
+
+
+    #[Route('/admin/userManagement/Search', name: 'app_admin_userSearch')]
+    public function searchUsers(Request $request): Response
+    {
+        $searchTerm = $request->query->get('searchTerm', '');
+        $queryBuilder = $rep->findBySearchTerm($searchTerm);
+
+
+        // Get the search query from the request
+        $query = $request->request->get('query');
+        // Find users by ID
+        $queryBuilder = $rep->findBySearchTerm($searchTerm);
+
+
+        // Render the filtered users using a Twig template
+        return $this->render('admin/user/userslist.html.twig', ['users'=>$queryBuilder]);
+
+    }
+
+
+
+
 
     #[Route('/admin/userManagement/deleteUser/{id}', name: 'app_admin_userManagement_deleteUser')]
      public function deleteUser($id, UserRepository $rep, ManagerRegistry $doctrine): Response

@@ -1,7 +1,5 @@
 {% extends "_bases/base.html.twig" %}
-{% block title %}
-	Account Profile
-{% endblock %}
+{% block title %} User Management {% endblock %}
 {% block content %}
 
 {% for message in app.flashes('message')%}
@@ -9,17 +7,24 @@
         <div>
             <div class="p-3 my-2 rounded -2 success" >{{message}}</div>
         </div>
-    <div/>
+    </div>
 {% endfor %}
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
-				<div class="card-header">
-					<h4 class="card-title">Bordered Table</h4>
-				</div>
+				<form action="{{ path('app_admin_userManagement') }}" method="get" class="form-inline mb-3">
+            		<div class="form-group">
+                		<input type="text" name="q" class="form-control" placeholder="Search by email...">
+            		</div>
+            		<button type="submit" class="btn btn-primary ml-2">Search</button>
+        		</form>
+
+				
+
+
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered verticle-middle table-responsive-sm">
+						<table id="userTable" class="table table-bordered verticle-middle table-responsive-sm">
 							<thead>
 								<tr>
 									<th scope="col">ID</th>
@@ -77,12 +82,47 @@
 
 									</tr>
 								{% endfor %}
+								
 
 							</tbody>
+    {{ knp_pagination_render(users) }}
+
 						</table>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+        $(document).ready(function(){
+            $('#searchbarinput').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#userTable tbody tr').each(function(){
+                    var found = false;
+                    $(this).find('td:nth-child(4)').each(function(){
+                        if($(this).text().toLowerCase().includes(value.toLowerCase())){
+                            found = true;
+                            return false;
+                        }
+                    });
+                    if(found){
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
+
+
+
+
+
 {% endblock %}

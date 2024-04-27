@@ -9,6 +9,7 @@ use App\Form\EditProfileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class UserController extends AbstractController
@@ -53,7 +54,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/profile/editPassword', name: 'app_user_editpassword')]
-    public function editPass(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function editPass(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         if ($request->isMethod('POST')) {
             $em = $this->getDoctrine()->getManager();
@@ -61,13 +62,17 @@ class UserController extends AbstractController
 
             // Check if the two passwords match
             if ($request->request->get('pass') === $request->request->get('pass2')) {
-                $hashedPassword = $passwordHasher->hashPassword($user, $request->request->get('pass'));
-                $user->setPassword($hashedPassword);
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $request->request->get('pass')
+                    )
+                );
 
                 $em->flush();
 
                 $this->addFlash('message', 'Mot de passe mis à jour avec succès');
-                return $this->redirectToRoute('users');
+                return $this->redirectToRoute('app_user');
             } else {
                 $this->addFlash('error', 'Les deux mots de passe ne sont pas identiques');
             }
