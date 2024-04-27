@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+send_sms:
+    path: '/sendSms'
+    controller: 'App\Controller\PanierController::sendSms'
+    methods: ['POST']
