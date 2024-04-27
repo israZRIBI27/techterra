@@ -1,0 +1,6 @@
+{# templates/feed/index.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('feed_feed')}}) }}
+    {{ form_row(form.rss_url, {'attr': {'placeholder': 'Enter RSS Feed URL'}}) }}
+    <button type="submit">Load RSS Feed</button>
+{{ form_end(form) }}

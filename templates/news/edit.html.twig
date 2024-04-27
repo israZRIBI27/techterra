@@ -6,6 +6,22 @@
 <div style="    max-width: 600px;" >
     <h1>Edit News</h1>
 
+       {% if form_errors(form.title) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.title) }}</p>
+                    </div>
+                {% endif %}
+  {% if form_errors(form.content) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.content) }}</p>
+                    </div>
+                {% endif %}
+ {% if form_errors(form.author) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.author) }}</p>
+                    </div>
+                {% endif %}
+
     {{ form_start(form, {'attr': {'id': 'news-form'}}) }}
         <div class="form-group">
             {{ form_label(form.title, 'Title') }}

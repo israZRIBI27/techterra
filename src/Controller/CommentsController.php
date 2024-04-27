@@ -17,7 +17,7 @@ class CommentsController extends AbstractController
     #[Route('/', name: 'app_comments_index', methods: ['GET'])]
     public function index(CommentsRepository $commentsRepository): Response
     {
-        return $this->render('comments/index.html.twig', [
+        return $this->render('news/show.html.twig', [
             'comments' => $commentsRepository->findAll(),
         ]);
     }
@@ -69,13 +69,25 @@ class CommentsController extends AbstractController
     }
 
     #[Route('/{commentId}', name: 'app_comments_delete', methods: ['POST'])]
-    public function delete(Request $request, Comments $comment, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, int $commentId, EntityManagerInterface $entityManager): Response
     {
+        // Find the comment by its ID
+        $comment = $entityManager->getRepository(Comments::class)->find($commentId);
+    
+        // Check if the comment exists
+        if (!$comment) {
+            throw $this->createNotFoundException('Comment not found');
+        }
+    
+        // Check if the CSRF token is valid
         if ($this->isCsrfTokenValid('delete'.$comment->getCommentId(), $request->request->get('_token'))) {
+            // Remove the comment
             $entityManager->remove($comment);
             $entityManager->flush();
         }
-
-        return $this->redirectToRoute('app_comments_index', [], Response::HTTP_SEE_OTHER);
+    
+        // Redirect back to the news index page
+        return $this->redirectToRoute('app_news_index');
     }
+    
 }

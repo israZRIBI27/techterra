@@ -24,12 +24,19 @@ class NewsType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a title.']),
                     new Length([
-                        'min' => 5,
+                        'min' => 2,
                         'minMessage' => 'The title must be at least {{ limit }} characters long.',
                     ]),
                 ],
             ])
-            ->add('author')
+            ->add('author', TextType::class, [
+                'constraints' =>
+                    new Regex([
+                        'pattern' => '/^[^\d]+$/',
+                        'message' => 'The author should not contain numbers.',
+                    ]),
+                ],
+            )
             ->add('content', CKEditorType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter content.']),

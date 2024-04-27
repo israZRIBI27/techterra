@@ -28,13 +28,14 @@ class Comments
     #[ORM\Column(type: "datetime", nullable: true, options: ["default" => "CURRENT_TIMESTAMP"])]
     private ?\DateTime $time = null;
 
-    #[ORM\ManyToOne(targetEntity: News::class, cascade: ["remove"])]
-    #[ORM\JoinColumn(name: "news_id", referencedColumnName: "id_news")]
-    private ?News $news;
+    #[ORM\ManyToOne(targetEntity: News::class)]
+#[ORM\JoinColumn(name: "news_id", referencedColumnName: "id_news")]
+private ?News $news;
 
-    #[ORM\ManyToOne(targetEntity: User::class, cascade: ["remove"])]
-    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id")]
-    private ?User $user ;
+#[ORM\ManyToOne(targetEntity: User::class)]
+#[ORM\JoinColumn(name: "user_id", referencedColumnName: "user_id")]
+private ?User $user;
+
 
     public function getCommentId(): ?int
     {

@@ -16,6 +16,11 @@
                         <p> {{ form_errors(form.content) }}</p>
                     </div>
                 {% endif %}
+ {% if form_errors(form.author) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.author) }}</p>
+                    </div>
+                {% endif %}
     {{ form_start(form, {'attr': {'id': 'news-form'}}) }}
         <div class="form-group">
             {{ form_label(form.title, 'Title') }}

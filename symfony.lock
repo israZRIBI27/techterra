@@ -1,4 +1,17 @@
 {
+    "debril/rss-atom-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "4.0",
+            "ref": "2c23ed747eda9f4c13f5e7eb55fffa1091fdd505"
+        },
+        "files": [
+            "./config/packages/rss_atom.yaml",
+            "./config/routes/rss_atom.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -49,6 +62,9 @@
         "files": [
             "./config/packages/fos_ckeditor.yaml"
         ]
+    },
+    "markocupic/rss-feed-generator-bundle": {
+        "version": "1.1.5"
     },
     "phpunit/phpunit": {
         "version": "9.6",
@@ -290,6 +306,9 @@
         "files": [
             "./config/packages/messenger.yaml"
         ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.17.0"
     },
     "twig/extra-bundle": {
         "version": "v3.8.0"

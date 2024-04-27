@@ -1,61 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Thread Details{% endblock %}
+{% block title %}News Details{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <!-- Thread details -->
                 <div class="card mt-5">
-                    <!-- Card header -->
                     <div class="card-header">
-                        <!-- Thread title -->
-                        <h2 class="card-title">{{ news.title }}</h2>
-                        <hr>
-                        <!-- Thread metadata -->
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text text-muted">{{ news.time ? news.time|date('Y-m-d H:i') : '' }}</p>
+                        <div class="row">
+                            <div class="col-auto">
+                                {{ form_start(reportForm) }}
+                                {{ form_widget(reportForm.user, {'attr': {'style': 'display:none;'}}) }}
+                                {{ form_widget(reportForm.news, {'attr': {'style': 'display:none;'}}) }}
+                                <input type="hidden" id="ReportStatus" name="ReportStatus" value="">
+                                <button type="submit" id="submit-btn" style="display: none;">Vote</button>
+                                {{ form_end(reportForm) }}
+                            </div>
+                            <div class="col">
+                                <h2 class="card-title">{{ news.title }}</h2>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text text-muted">{{ news.time ? news.time|date('Y-m-d H:i') : '' }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Card body -->
                     <div class="card-body">
                         <p class="card-text">{{ news.content |raw }}</p>
                     </div>
-                    <!-- Card footer -->
                     <div class="card-footer">
                         <a href="{{ path('app_news_index') }}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Back to List</a>
+                        <a href="{{ path('app_news_edit', {'idNews': news.idNews}) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
+                       
                     </div>
                 </div>
                 <hr>
-                <!-- Add comment form -->
+
+                <script>
+                   document.querySelectorAll('.report-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        document.getElementById('ReportStatus').value = 'reported'; // Change 'report' to 'reported'
+        document.getElementById('submit-btn').click(); // Submit the form
+    });
+});
+
+                </script>
+
                 <div class="card mt-3">
                     <div class="card-header">
                         <h3 class="card-title">Add a Comment</h3>
                     </div>
                     <div class="card-body">
                         {{ form_start(commentForm, {'attr': {'id': 'comment-form'}}) }}
-                        {{ form_widget(commentForm.user, {'attr': {'style': 'display:none;'}}) }}
-                        {{ form_widget(commentForm.news, {'attr': {'style': 'display:none;'}}) }}
                         {{ form_widget(commentForm.content) }}
                         {{ form_widget(commentForm.time, {'attr': {'style': 'display:none;'}}) }}
+                        {{ form_widget(commentForm.user, {'attr': {'style': 'display:none;'}}) }}
+                        {{ form_widget(commentForm.news, {'attr': {'style': 'display:none;'}}) }}
+
                         {{ form_widget(commentForm.envoyer, {'attr': {'class': 'btn btn-primary mt-3'}}) }}
                         {{ form_end(commentForm) }}
                     </div>
                 </div>
                 <hr>
-                <!-- Comments section -->
-                <div class="text-center mt-5"> <!-- Centered comments -->
-                    <h3>Comments</h3>
-                    {% for comment in Comments %}
-                        <div class="card mt-3">
-                            <div class="card-header" style="display: flex;align-items: center;justify-content: space-between;">
-                                <span><i class="bi bi-person me-1"></i>{{ comment.user }}</span>
-                                <span class="text-muted"><i class="bi bi-clock me-1"></i>{{ comment.time ? comment.time|date('Y-m-d H:i') : '' }}</span>
-                            </div>
+                <h3 class="mt-5">Comments</h3>
+                {% for comment in comments %}
+                    <div class="card mt-3">
+                        <div class="card-header" style="display: flex;align-items: center;justify-content: space-between;">
+                            <span><i class="bi bi-person me-1"></i>{{ comment.user }}</span>
+                            <span class="text-muted">
+                                <i class="bi bi-clock me-1"></i>{{ comment.time ? comment.time|date('Y-m-d H:i') : '' }}
+                                <a href="{{ path('app_comments_delete', {'idNews': news.idNews, 'commentId': comment.commentId}) }}" class="btn btn-danger ms-2" onclick="event.preventDefault(); document.getElementById('delete-form-{{ comment.commentId }}').submit();"><i class="bi bi-trash"></i></a>
+                            </span>
                         </div>
-                    {% endfor %}
-                </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ comment.content|raw }}</p>
+                        </div>
+                    </div>
+                   <form id="delete-form-{{ comment.commentId }}" action="{{ path('app_comments_delete', {'idNews': news.idNews, 'commentId': comment.commentId}) }}" method="POST" style="display: none;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.commentId) }}">
+</form>
+                {% endfor %}
             </div>
         </div>
     </div>

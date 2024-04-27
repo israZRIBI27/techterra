@@ -6,6 +6,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\NewsRepository;
 use App\Entity\User;
+use App\Entity\Reports;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 
@@ -36,8 +39,11 @@ class News
     private ?int $views = 0;
 
 
-   
-
+   /* public function __construct()
+    {
+        $this->reports = new ArrayCollection();
+    }
+*/
     public function getIdNews(): ?int
     {
         return $this->idNews;
@@ -121,6 +127,46 @@ class News
         return $this->title;
     
     }
+
+    
+
+        public function addReport(Reports $report): self
+    {
+        if (!$this->reports->contains($reports)) {
+            $this->reports[] = $report;
+            $report->setNews($this);
+        }
+
+        return $this;
+    }
+
+    public function removereport(Reports $report): self
+    {
+        if ($this->reports->removeElement($report)) {
+            // set the owning side to null (unless already changed)
+            if ($report->getNews() === $this) {
+                $report->setNews(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function countReportsAsString(): string
+    {
+        $reportsCount = 0;
+       
+
+        foreach ($this->reports as $report) {
+            if ($report->getReportsStatus() === 'reported') {
+                $reportsCount++;
+            } 
+        }
+
+        return "Reports: $reportsCount";
+    }
+
+    
 
 
 }

@@ -21,13 +21,13 @@ class Reports
  
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(name: "userid", referencedColumnName: "user_id")]
-    private int $user;
+    #[ORM\JoinColumn(name: "user_id",referencedColumnName: "user_id")]
+    private $user;
 
+    #[ORM\ManyToOne(targetEntity: News::class)] // Updated the inversedBy value
+    #[ORM\JoinColumn(name: "newsid", referencedColumnName: "id_news", nullable: false)]
+    private $news;
 
-    #[ORM\ManyToOne(targetEntity: News::class)]
-    #[ORM\JoinColumn(name: "newsid", referencedColumnName: "id_news")]
-    private int $newsId;
 
     public function getReportStatus(): ?string
     {
