@@ -73,4 +73,62 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
     }
+
+    public function getUserGenderStatistics()
+    {
+        $maleCount = $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.user_gender = :gender')
+            ->setParameter('gender', 'male')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $femaleCount = $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.user_gender = :gender')
+            ->setParameter('gender', 'female')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $totalUsers = $maleCount + $femaleCount;
+
+        $statistics = [
+            'male_count' => $maleCount,
+            'female_count' => $femaleCount,
+            'total_users' => $totalUsers,
+            'male_percentage' => ($totalUsers > 0) ? ($maleCount / $totalUsers) * 100 : 0,
+            'female_percentage' => ($totalUsers > 0) ? ($femaleCount / $totalUsers) * 100 : 0,
+        ];
+
+        return $statistics;
+    }
+
+    public function getUserVerificationStatistics()
+    {
+        $verifiedCount = $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.isVerified = :verified')
+            ->setParameter('verified', true)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $unverifiedCount = $this->createQueryBuilder('u')
+            ->select('COUNT(u)')
+            ->where('u.isVerified = :unverified')
+            ->setParameter('unverified', false)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $totalUsers = $verifiedCount + $unverifiedCount;
+
+        $statistics = [
+            'verified_count' => $verifiedCount,
+            'unverified_count' => $unverifiedCount,
+            'total_users' => $totalUsers,
+            'verified_percentage' => ($totalUsers > 0) ? ($verifiedCount / $totalUsers) * 100 : 0,
+            'unverified_percentage' => ($totalUsers > 0) ? ($unverifiedCount / $totalUsers) * 100 : 0,
+        ];
+
+        return $statistics;
+    }
 }

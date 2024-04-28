@@ -16,10 +16,12 @@ use Knp\Component\Pager\PaginatorInterface;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
+        $userGenderStatistics = $userRepository->getUserGenderStatistics();
+        $userVerificationStatistics = $userRepository->getUserVerificationStatistics();
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'user_gender_statistics' => $userGenderStatistics, 'user_verification_statistics' => $userVerificationStatistics,
         ]);
     }
 

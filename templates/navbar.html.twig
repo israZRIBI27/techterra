@@ -42,7 +42,7 @@
 							<i class="mdi mdi-account"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="./app-profile.html" class="dropdown-item">
+							<a href="{{ path('app_user') }}" class="dropdown-item">
 								<i class="icon-user"></i>
 								<span class="ml-2">Profile
 								</span>
@@ -75,24 +75,33 @@
 	<div class="quixnav-scroll">
 		<ul class="metismenu" id="menu">
 			<li class="nav-label first">Main Menu</li>
-			<!-- <li><a href="index.html"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-						                    </li> -->
-			<li>
-					{% for role in app.user.getRoles %}
-						{% if role == "ROLE_ADMIN" %}
-							<a class="has-arrow" aria-expanded="false" href="{{path('app_admin_userManagement')}}">
+
+			{% for role in app.user.getRoles %}
+				{% if role == "ROLE_ADMIN" %}
+					<li>
+
+						<a class="has-arrow" aria-expanded="false" href="{{path('app_admin')}}">
+							<i class="i-home"></i>
+							Dashboard
+						</a>
+
+
+					</li>
+
+					<li>
+
+						<a class="has-arrow" aria-expanded="false" href="{{path('app_admin_userManagement')}}">
 							<i class="icon icon-single-04"></i>
 							User Management
-							</a>
-						{% endif %}
-						{% if not loop.last %},
-						{% endif %}
-					{% endfor %}
-			</li>
+						</a>
+					</li>
+
+
+				{% endif %}
+				{% if not loop.last %}{% endif %}
+			{% endfor %}
 
 
 		</ul>
 	</div>
-
-
 </div></div>

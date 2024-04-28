@@ -1,199 +1,244 @@
-{% extends "_bases/base.html.twig" %}
-{% block title %} Account Profile {% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% for message in app.flashes('message')%}
-    <div>
-        <div>
-            <div class="p-3 my-2 rounded -2 success" >{{message}}</div>
-        </div>
-    <div/>
-{% endfor %}
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="profile">
-					<div class="profile-head">
-
-						<div class="profile-info">
-							<div class="row justify-content-left">
-								<div class="col-xl-8">
-									<div class="row">
-
-
-										<div>
-
-											<div class="profile-photo">
-												{% set profilePicture = app.user.getUserPicture %}
-												<img src="{{ asset('Images/ProfileImages/' ~ profilePicture) }} " style="width:100px;height:auto;" class="img-fluid rounded-circle" alt="">
-											</div>
-										</div>
+		<title> Profile </title>
+		<!-- ================= Favicon ================== -->
+		<!-- Standard -->
+		<link
+		rel="shortcut icon" href="http://placehold.it/64.png/000/fff"> <!-- Retina iPad Touch Icon-->
+		<link
+		rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+		<!-- Retina iPhone Touch Icon-->
+		<link
+		rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+		<!-- Standard iPad Touch Icon-->
+		<link
+		rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+		<!-- Standard iPhone Touch Icon-->
+		<link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	</head>
 
 
-										<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
-											<div class="profile-name">
-												<h4 class="text-primary">{{app.user.getUserUsername}}</h4>
-												<p>
-													{% for role in app.user.getRoles %}
-														{% if role == "ROLE_USER" %}User
-															{% elseif role == "ROLE_ADMIN" %}Admin
-														{% endif %}
-														{% if not loop.last %},
-														{% endif %}
-													{% endfor %}
-												</p>
-											</div>
-										</div>
+	<div class="nav-header">
+		<a href="index.html" class="brand-logo">
+			<img class="brand-title" src="./images/dd.png" alt="">
+		</a>
 
 
-										<div class="col-xl-4 col-sm-4 border-right-1 prf-col">
-											<div class="profile-email">
-												<h4 class="text-muted">{{app.user.getEmail}}</h4>
-												<p>Email</p>
-											</div>
-										</div>
-										<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
-											<div class="profile-call">
-												<h4 class="text-muted">{{app.user.getUserphonenumber}}</h4>
-												<p>Phone No.</p>
-											</div>
-										</div>
-									</div>
-								</div>
+	</div>
+	<!--**********************************
+	            Nav header end
+	        ***********************************-->
+
+	<!--**********************************
+	            Header start
+	        ***********************************-->
+	<div class="header">
+		<div class="header-content">
+			<nav class="navbar navbar-expand">
+				<div class="collapse navbar-collapse justify-content-between">
+					<div class="header-left">
+						<div class="search_bar dropdown">
+							<span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+								<i class="mdi mdi-magnify"></i>
+							</span>
+							<div class="dropdown-menu p-0 m-0">
+								<form>
+									<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+								</form>
 							</div>
 						</div>
 					</div>
+
+					<ul class="navbar-nav header-right">
+
+						<li class="nav-item dropdown header-profile">
+							<a class="nav-link" href="#" role="button" data-toggle="dropdown">
+								<i class="mdi mdi-account"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a href="{{ path('app_user') }}" class="dropdown-item">
+									<i class="icon-user"></i>
+									<span class="ml-2">Profile
+									</span>
+								</a>
+								<a href="./email-inbox.html" class="dropdown-item">
+									<i class="icon-envelope-open"></i>
+									<span class="ml-2">Inbox
+									</span>
+								</a>
+								<a href="{{path('app_logout')}}" class="dropdown-item">
+									<i class="icon-key"></i>
+									<span class="ml-2">Logout
+									</span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+</html></br></br></br></br></br></br></br>{% block content %}{% for message in app.flashes('message')%}<div><div><div class="p-3 my-2 rounded -2 success">{{message}}</div></div><div/>{% endfor %}<div class="row"><div class="col-lg-12"><div class="profile"><div class="profile-head"><div class="profile-info">
+<div class="row justify-content-left">
+	<div class="col-xl-8">
+		<div class="row">
+
+
+			<div>
+
+				<div class="profile-photo">
+					{% set profilePicture = app.user.getUserPicture %}
+					<img src="{{ asset('Images/ProfileImages/' ~ profilePicture) }} " style="width:100px;height:auto;" class="img-fluid rounded-circle" alt="">
+				</div>
+			</div>
+
+
+			<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
+				<div class="profile-name">
+					<h4 class="text-primary">{{app.user.getUserUsername}}</h4>
+					<p>
+						{% for role in app.user.getRoles %}
+							{% if role == "ROLE_USER" %}User
+								{% elseif role == "ROLE_ADMIN" %}Admin
+							{% endif %}
+							{% if not loop.last %},
+							{% endif %}
+						{% endfor %}
+					</p>
+				</div>
+			</div>
+
+
+			<div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+				<div class="profile-email">
+					<h4 class="text-muted">{{app.user.getEmail}}</h4>
+					<p>Email</p>
+				</div>
+			</div>
+			<div class="col-xl-1 col-sm-1 border-right-1 prf-col">
+				<div class="profile-call">
+					<h4 class="text-muted">{{app.user.getUserphonenumber}}</h4>
+					<p>Phone No.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div></div></div></div></div><div class="row"><div class="col-lg-12"><div class="card"><div class="card-header"><h4 class="card-title">Edit your Profile!</h4></div>{{form_start(form)}}<div class="card-body"><div class="form-validation">
+<form class="form-valide" method="post">
+	{{form_start(form, )}}
+
+	<div class="row">
+		<div class="col-xl-6">
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-username">Username
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_username, {'attr': {'class': 'form-control'}}) }}
+
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-email">Email
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-email">Firt Name:
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_firstname, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-email">Last Name:
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_lastname, {'attr': {'class': 'form-control'}}) }}
 				</div>
 			</div>
 		</div>
 
+		<div class="col-xl-6">
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-skill">Best Skill
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_gender, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="card-title">Edit your Profile!</h4>
-					</div>
-					{{form_start(form)}}
-					<div class="card-body">
-						<div class="form-validation">
-							<form class="form-valide" method="post" >
-                            					{{form_start(form, )}}
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-currency">Profile Picture:
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_picture, {'attr': {'class': 'form-control'}}) }}
+				</div>
+			</div>
 
-								<div class="row">
-									<div class="col-xl-6">
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-username">Username
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_username, {'attr': {'class': 'form-control'}}) }}
-												
-											</div>
-										</div>
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-website">Birthday:
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_birthday, {'attr': {'class': 'form-control'}})  }}
+				</div>
+			</div>
 
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-email">Email
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-email">Firt Name:
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_firstname, {'attr': {'class': 'form-control'}}) }}
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-email">Last Name:
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_lastname, {'attr': {'class': 'form-control'}}) }}
-											</div>
-										</div>
-									</div>
-
-									<div class="col-xl-6">
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-skill">Best Skill
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_gender, {'attr': {'class': 'form-control'}}) }}
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-currency">Profile Picture:
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-                                            {{ form_widget(form.user_picture, {'attr': {'class': 'form-control'}}) }}
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-website">Birthday:
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_birthday, {'attr': {'class': 'form-control'}})  }}
-											</div>
-										</div>
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label" for="val-phoneus">Phone:
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-6">
-												{{ form_widget(form.user_phonenumber, {'attr': {'class': 'form-control'}}) }}
-
-											</div>
-										</div>
-
-
-										<div class="form-group row">
-											<label class="col-lg-4 col-form-label">
-												<a href="javascript:void()">Terms &amp; Conditions</a>
-												<span class="text-danger">*</span>
-											</label>
-											<div class="col-lg-8">
-												<label class="css-control css-control-primary css-checkbox" for="val-terms">
-													<input type="checkbox" class="css-control-input mr-2" id="val-terms" name="val-terms" value="1">
-													<span class="css-control-indicator"></span>
-													I agree to the terms</label>
-											</div>
-										</div>
-
-										<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-										<div class="form-group row">
-											<div class="col-lg-8 ml-auto">
-												<button type="submit" class="btn btn-success">Apply Changes</button>
-											</div>
-										</div>
-										<div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-												<a class="btn btn-danger" href="{{path('app_user_editpassword')}}">Edit Password</a>
-											</div>
-										</div>
-									</div>
-								</div>
-                                	{{form_end(form)}}
-							</form>
-						</div>
-					</div>
-				
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label" for="val-phoneus">Phone:
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-6">
+					{{ form_widget(form.user_phonenumber, {'attr': {'class': 'form-control'}}) }}
 
 				</div>
 			</div>
 
 
-		{% endblock %}
+			<div class="form-group row">
+				<label class="col-lg-4 col-form-label">
+					<a href="javascript:void()">Terms &amp; Conditions</a>
+					<span class="text-danger">*</span>
+				</label>
+				<div class="col-lg-8">
+					<label class="css-control css-control-primary css-checkbox" for="val-terms">
+						<input type="checkbox" class="css-control-input mr-2" id="val-terms" name="val-terms" value="1">
+						<span class="css-control-indicator"></span>
+						I agree to the terms</label>
+				</div>
+			</div>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<div class="form-group row">
+				<div class="col-lg-8 ml-auto">
+					<button type="submit" class="btn btn-success">Apply Changes</button>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-lg-8 ml-auto">
+					<a class="btn btn-danger" href="{{path('app_user_editpassword')}}">Edit Password</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{form_end(form)}}
+</form></div></div></div></div><script src="vendor/global/global.min.js"></script><script src="js/quixnav-init.js"></script><script src="js/custom.min.js"></script><script src="vendor/raphael/raphael.min.js"></script><script src="vendor/morris/morris.min.js"></script><script src="vendor/circle-progress/circle-progress.min.js"></script><script src="vendor/chart.js/Chart.bundle.min.js"></script><script src="vendor/gaugeJS/dist/gauge.min.js"></script><!--  flot-chart js --><script src="vendor/flot/jquery.flot.js"></script><script src="vendor/flot/jquery.flot.resize.js"></script><!-- Owl Carousel --><script src="vendor/owl-carousel/js/owl.carousel.min.js"></script><!-- Counter Up --><script src="vendor/jqvmap/js/jquery.vmap.min.js"></script><script src="vendor/jqvmap/js/jquery.vmap.usa.js"></script><script src="vendor/jquery.counterup/jquery.counterup.min.js"></script><script src="js/dashboard/dashboard-1.js"></script></div></div><div class="footer"><div class="copyright"><p>Copyright © Designed &amp; Developed by<a href="#" target="_blank">The Matrix Studio</a>2023</p></div></div></div></body>{% endblock %}
