@@ -19,10 +19,10 @@
             {% endfor %}
         {% else %}
             {# Render the RSS URL input form if RSS feeds are not yet loaded #}
-            <form action="{{ path('feed_feed') }}" method="get">
-                <label for="rss_url">Enter RSS Feed URLs (comma-separated):</label>
+            <form action="{{ path('save_rss_url') }}" method="post">
+                <label for="rss_url">Enter RSS Feed URL:</label>
                 <input type="text" id="rss_url" name="rss_url">
-                <button type="submit">Load RSS Feeds</button>
+                <button type="submit">Save RSS URL</button>
             </form>
         {% endif %}
     </div>

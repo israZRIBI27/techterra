@@ -55,30 +55,7 @@ class RssFeedController extends AbstractController
         return simplexml_load_file($rssUrl);
     }
 
-    private function registerLinks($rss)
-    {
-        $kernelProjectDir = $this->getParameter('kernel.project_dir');
-        $logFilePath = $kernelProjectDir . '/var/log/rss_links.log'; // Path to the log file
-        $logContent = '';
-    
-        foreach ($rss->channel as $item) {
-            $link = (string) $item->link;
-    
-            // Parse the base URL
-            $baseUrl = (string) $rss->channel->link;
-            $parsedBaseUrl = parse_url($baseUrl);
-    
-            // If the link is a relative path, resolve it to get the complete URL
-            if (!filter_var($link, FILTER_VALIDATE_URL) && isset($parsedBaseUrl['host'])) {
-                $link = $parsedBaseUrl['scheme'] . '://' . $parsedBaseUrl['host'] . '/' . ltrim($link, '/');
-            }
-    
-            $logContent .= "$link\n";
-        }
-    
-        // Append the log content to the file
-        file_put_contents($logFilePath, $logContent, FILE_APPEND);
-    }
+  
     
 
 
@@ -105,6 +82,25 @@ class RssFeedController extends AbstractController
     
         // Redirect the user to the feed page with the generated URLs as parameters
         return new RedirectResponse($redirectUrl);
+    }
+
+
+    #[Route('/save-rss-url', name: 'save_rss_url')]
+    public function saveRssUrl(Request $request): Response
+    {
+        // Get the input text from the form submission
+        $rssUrl = $request->request->get('rss_url');
+    
+        // Validate the input URL (optional)
+    
+        // Save the input URL to a local file
+        $kernelProjectDir = $this->getParameter('kernel.project_dir');
+        $filePath = $kernelProjectDir . '/var/log/rss_links.log';
+        file_put_contents($filePath, $rssUrl . PHP_EOL, FILE_APPEND);
+    
+        // Optionally, you can provide feedback to the user
+        // Redirect to the feed page
+        return new RedirectResponse($this->generateUrl('feed_feed', ['rss_url' => $rssUrl]));
     }
     
 }

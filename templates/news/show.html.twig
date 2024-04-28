@@ -22,6 +22,7 @@
                                 <hr>
                                 <div class="d-flex justify-content-between">
                                     <p class="card-text text-muted">{{ news.time ? news.time|date('Y-m-d H:i') : '' }}</p>
+                                    <p class="card-text text-muted">Reports: {{ news.reports }}</p> {# Display reports count #}
                                 </div>
                             </div>
                         </div>

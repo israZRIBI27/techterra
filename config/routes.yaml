@@ -11,3 +11,9 @@ feed_feed:
     path: /feed
     controller: App\Controller\RssFeedController::index
     methods: ['GET']
+
+app_news_about:
+    path: /news/about
+    controller: App\Controller\NewsController::about
+    methods: ['GET']
+

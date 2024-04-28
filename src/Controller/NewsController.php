@@ -9,6 +9,7 @@ use App\Form\CommentsType;
 use App\Entity\News;
 use App\Form\NewsType;
 use App\Form\ReportsType;
+use App\Form\ReportsRep;
 use App\Entity\Reports;
 use App\Entity\User;
 use App\Repository\NewsRepository;
@@ -107,25 +108,33 @@ class NewsController extends AbstractController
     
     }
 
+
+    
     #[Route('/{id}', name: 'app_news_show1', methods: ['GET', 'POST'])]
     public function show1(int $id, Request $request): Response
     {
+
         
         $entityManager = $this->getDoctrine()->getManager();
         
         // Retrieve the news
         $news = $entityManager->getRepository(News::class)->find($id);
-        $user = $entityManager->getRepository(User::class)->find(1);
+        $user = $entityManager->getRepository(User::class)->find(2);
     
-
-    
+        // Increment the views count for the news article
+        $news->setViews($news->getViews() + 1);
+        
+        // Persist the updated news entity
+        $entityManager->persist($news);
+        $entityManager->flush();
+        
         // Retrieve the comments associated with the news
         $comments = $entityManager->getRepository(Comments::class)->findBy(['news' => $news]);
     
         // Create a new instance of the Comments entity
         $comment = new Comments();
     
-        // Set the user for the comment (you can adjust this according to your logic)
+        // Set the user for the comment
         $comment->setUser($user);
     
         // Set the time for the comment
@@ -167,26 +176,50 @@ class NewsController extends AbstractController
         ]);
     
         // Handle form submission for reports
-        $reportForm->handleRequest($request);
-        if ($reportForm->isSubmitted() && $reportForm->isValid()) {
-            $ReportStatus = $request->request->get('ReportStatus');
+        if ($request->isMethod('POST')) {
+            $reportForm->handleRequest($request);
+            if ($reportForm->isSubmitted() && $reportForm->isValid()) {
+                $ReportStatus = $request->request->get('ReportStatus');
     
-            if ($existingReport && $existingReport->getReportStatus() === $ReportStatus) {
-                // If an existing report with the same status exists, remove it
-                $entityManager->remove($existingReport);
-            } else {
-                // Set the report status for the new report
-                $report->setReportStatus($ReportStatus);
-              
-                // Persist the new or updated report entity to the database
-                $entityManager->persist($report);
+                if ($existingReport && $existingReport->getReportStatus() === $ReportStatus) {
+                    // If an existing report with the same status exists, remove it
+                    $entityManager->remove($existingReport);
+                    
+                    // Decrement the reports count for the news
+                    $news->setReports($news->getReports() - 1);
+                    
+                    // Persist the news entity to the database
+                    $entityManager->persist($news);
+                } else {
+                    // Set the report status for the new report
+                    $report->setReportStatus($ReportStatus);
+                    
+                    // Increment the reports count for the news
+                    $news->setReports($news->getReports() + 1);
+                    
+                    // Persist the new or updated report entity and news entity to the database
+                    $entityManager->persist($report);
+                    $entityManager->persist($news);
+                }
+    
+                // Flush changes to the database
+                $entityManager->flush();
+    
+                // Redirect to the same page to prevent resubmission
+                return $this->redirect($request->getUri());
             }
+        }
     
-            // Flush changes to the database
+        // Check if the reports count has reached 3 or more
+        if ($news->getReports() >= 3) {
+            // Delete the news article
+            $entityManager->remove($news);
             $entityManager->flush();
-    
-            // Redirect to the same page to prevent resubmission
-            return $this->redirect($request->getUri());
+            
+            $this->addFlash('success', 'The news article has been deleted due to multiple reports.');
+            
+            // Redirect to the news index page or any other appropriate page
+            return $this->redirectToRoute('app_news_index');
         }
     
         // Render the template with the news, comments, and forms
@@ -195,77 +228,6 @@ class NewsController extends AbstractController
             'comments' => $comments,
             'commentForm' => $commentForm->createView(),
             'reportForm' => $reportForm->createView()
-        ]);
-    }
-    
-
-
-
-    #[Route('/comment/add', name: 'app_comment_add', methods: ['POST'])]
-    public function add(Request $request): Response
-    {
-        $commentForm = $this->createForm(CommentsType::class);
-        $commentForm->handleRequest($request);
-
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $comment = $commentForm->getData();
-            // Assuming you have access to the current user
-            $comment->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Your comment has been added successfully.');
-
-            return $this->redirectToRoute('app_news_show', ['id' => $comment->getNews()->getId()]);
-        }
-
-        return $this->redirectToRoute('app_news_show', ['id' => $comment->getNews()->getId()]);
-    }
-
-   
-    #[Route('aaa/{idNews}', name: 'app_news_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, News $news, EntityManagerInterface $entityManager): Response
-    {
-
-        $Comments = $entityManager->getRepository(Comments::class)->findBy(['news' => $news]);
-        $comment = new Comments();
-        $user = $entityManager->getRepository(User::class)->find(1);
-        $comment->setUser($user);
-        $comment->setTime(new \DateTime());
-        $comment->setNews($news);
-        
-   
-        $commentForm = $this->createForm(CommentsType::class, $comment);
-        
-        // Handle form submission
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-          
-            
-            // Persist and flush the comment
-            $entityManager->persist($comment);
-            $entityManager->flush();
-        
-            $this->addFlash('success', 'Your comment has been successfully posted.');
-        
-            // Redirect to the same page to prevent resubmission
-            return $this->redirectToRoute('app_news_show', ['idNews' => $news->getIdNews()]);
-        }
-
-       
-
-
-
-
-        
-        // Render the template with the news, comments, and comment form
-        return $this->render('news/show.html.twig', [
-            'news' => $news,
-            'Comments' => $Comments,
-            'commentForm' => $commentForm->createView(),
-        
-            
         ]);
     }
     
@@ -334,6 +296,4 @@ class NewsController extends AbstractController
         return $this->redirectToRoute('app_news_index');
     }
 
-   
-    
 }
