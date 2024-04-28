@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier Statistics{% endblock %}
+
+{% block body %}
+    <h1>Panier Statistics</h1>
+<div class="chart-container">
+    <canvas id="panierChart"></canvas>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('panierChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Price > 100', 'Price <= 100'],
+                    datasets: [{
+                        label: 'Panier Price Statistics',
+                        data: [{{ statistics.over100 }}, {{ statistics.below100 }}],
+                        backgroundColor: ['#ff6384', '#36a2eb'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    title: {
+                        display: true,
+                        text: 'Percentage of Panier Prices',
+                        fontSize: 16,
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

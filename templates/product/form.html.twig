@@ -1,0 +1,75 @@
+{# templates/product/form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="formA-body">
+        <div class="row">
+            <div class="formA-holder">
+                <div class="formA-content">
+                    <div class="formA-items">
+                        <h3>Add Product</h3>
+                        <p>Fill in the product details below.</p>
+                        {{ form_start(formA, {'attr': {'class': 'requires-validation', 'novalidate': true}}) }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="formA-group">
+                                    {{ form_label(formA.name, 'Product Name', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.name, {'attr': {'class': 'formA-control', 'placeholder': 'Product Name', 'required': true}}) }}
+                                    {% if form_errors(formA.name) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.name) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="formA-group">
+                                    {{ form_label(formA.price, 'Product Price', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.price, {'attr': {'class': 'formA-control', 'placeholder': 'Product Price', 'required': true}}) }}
+                                    {% if form_errors(formA.price) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.price) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="formA-group">
+                                    {{ form_label(formA.description, 'Product Description', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.description, {'attr': {'class': 'formA-control', 'placeholder': 'Product Description', 'required': true}}) }}
+                                    {% if form_errors(formA.description) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.description) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="formA-group">
+                                    {{ form_label(formA.image, 'Product Image', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.image, {'attr': {'class': 'formA-control', 'placeholder': 'Product Image URL', 'required': true}}) }}
+                                    {% if form_errors(formA.image) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.image) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="formA-group">
+                                    {{ form_label(formA.quantity, 'Product quantity', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.quantity, {'attr': {'class': 'formA-control', 'placeholder': 'Product quantity', 'required': true}}) }}
+                                    {% if form_errors(formA.quantity) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.quantity) }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group text-right"> <!-- Alignement du bouton à droite -->
+                            <button id="submit" type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
+                        {{ form_end(formA) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

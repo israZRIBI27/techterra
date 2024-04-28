@@ -28,6 +28,12 @@
     bottom: 45px;
     z-index: 99;
 }
+.chart-container {
+    width: 100%; /* Full width */
+    height: auto; /* Auto-adjust height */
+    max-width: 600px; /* Limit maximum width */
+    margin: 0 auto; /* Center horizontally */
+}
 
 
 /* Animation simple pour tester */

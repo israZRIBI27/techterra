@@ -5,3 +5,4 @@ send_sms:
     path: '/sendSms'
     controller: 'App\Controller\PanierController::sendSms'
     methods: ['POST']
+    

@@ -1,0 +1,61 @@
+{# templates/product/Productlist.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<div class="row">
+    <h3>Our Market</h3>
+    {% for product in Products %}
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <img src="{{ asset('uploads/products/' ~ product.image) }}" class="card-img-top" alt="Product Image" style="max-height: 200px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Description: {{ product.description }}</p>
+                <p class="card-text">Price: {{ product.price }}</p>
+                <p class="card-text">Quantity: {{ product.quantity }}</p>
+                <a href ="{{ path('Product_update', {'id': product.id}) }}" class="btn btn-primary">Update</a> 
+                <a href ="{{ path('Product_delete', {'id': product.id}) }}" class="btn btn-primary">Delete</a> 
+                <button class="btn btn-primary" onclick="addToCart({{ product.id }}, {{ product.quantity }})">Add to cart</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{{ knp_pagination_render(Products) }}
+
+<script>
+    function addToCart(productId, productQuantity) {
+        // Prompt the user if the product quantity is insufficient
+        if (productQuantity < 1) {
+            alert("Sorry, this product is out of stock.");
+            return;
+        }
+
+        // Perform AJAX request to add the product to the cart
+        // Example AJAX request using fetch API
+        fetch("{{ path('add_to_cart', {'id': 0}) }}".replace('0', productId), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity: 1 }) // You can adjust the quantity here
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add the product to the cart.');
+            }
+            // Handle successful response if needed
+            // For example, redirect to the cart page or show a success message
+            console.log('Product added to the cart successfully!');
+        })
+        .catch(error => {
+            console.error('Error adding product to cart:', error.message);
+            // Handle the error condition, e.g., display an error message
+        });
+    }
+</script>
+
+{% endblock %}

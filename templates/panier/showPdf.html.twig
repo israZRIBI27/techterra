@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Panier PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<img src="\public\images\logo.jpg" style="position: absolute; opacity: 0.1; top: 50px; left: 50px; width: 200px;">
+
+    <h1>Panier Details</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+      <tbody>
+    {% for item in panier %}
+    <tr>
+        <td>{{ item.idProduit.name }}</td>
+        <td>{{ item.price }} EUR</td>
+        <td>{{ item.quantite }}</td>
+        <td>{{ item.price * item.quantite }} EUR</td>
+    </tr>
+    {% endfor %}
+</tbody>
+    </table>
+
+</body>
+</html>
