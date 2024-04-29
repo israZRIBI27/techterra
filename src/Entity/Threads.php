@@ -199,5 +199,30 @@ class Threads
         return "Upvotes: $upvotesCount, Downvotes: $downvotesCount";
     }
 
+
+    public function upvotes(): string
+    {
+        $upvotesCount = 0;
+
+        foreach ($this->votes as $vote) {
+            if ($vote->getVoteType() === 'upvote') {
+                $upvotesCount++;
+            }
+        }
+        return $upvotesCount;
+    }
+
+    public function downvotes(): string
+    {
+        $upvotesCount = 0;
+
+        foreach ($this->votes as $vote) {
+            if ($vote->getVoteType() === 'downvote') {
+                $upvotesCount++;
+            }
+        }
+        return $upvotesCount;
+    }
+
 }
 

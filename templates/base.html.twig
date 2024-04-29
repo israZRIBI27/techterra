@@ -8,6 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+
     {% block css%}
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -51,7 +52,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark p-0">
             <a href="index.html" class="navbar-brand">
-                <img width="200px"src="{{ asset('logo.png') }}">
+                <img style="width:200px;height:auto;" src="{{ asset('logo.png') }}">
             </a>
             <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
@@ -61,7 +62,7 @@
                 <div class="navbar-nav ms-auto">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
                     <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Services</a>
+                    <a href="{{ path('app_threads_index') }}" class="nav-item nav-link">Threads</a>
                     <a href="project.html" class="nav-item nav-link">Projects</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -676,7 +677,7 @@
         <div class="row g-5">
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                 <a href="index.html" class="d-inline-block mb-3">
-                    <h1 class="text-white">AI<span class="text-primary">.</span>Tech</h1>
+                    <img style="width:200px;height:auto;" src="{{ asset('logo.png') }}">
                 </a>
                 <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
                     amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus

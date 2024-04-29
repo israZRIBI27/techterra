@@ -1,0 +1,3 @@
+<?php //App%255CController%255CThreadsController%2523isBadContent
+
+return [PHP_INT_MAX, []];

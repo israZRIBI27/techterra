@@ -538,3 +538,8 @@ h6,
     padding-right: 0;
     border-right: none;
 }
+
+img{
+    width:100%;
+    display: block;
+}

@@ -45,4 +45,13 @@ class ThreadsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByTitle($title)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

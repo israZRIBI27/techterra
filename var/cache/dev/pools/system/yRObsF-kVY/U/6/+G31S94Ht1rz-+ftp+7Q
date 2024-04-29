@@ -1,0 +1,3 @@
+<?php //App%255CEntity%255CThreads%2523downvotes
+
+return [PHP_INT_MAX, []];

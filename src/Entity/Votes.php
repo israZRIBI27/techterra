@@ -21,7 +21,7 @@ class Votes
     private $user;
 
 
-    #[ORM\ManyToOne(targetEntity: Threads::class, inversedBy: "votes")] // Updated the inversedBy value
+    #[ORM\ManyToOne(targetEntity: Threads::class, inversedBy: "svote")] // Updated the inversedBy value
     #[ORM\JoinColumn(name: "thread_id", referencedColumnName: "thread_id", onDelete: "CASCADE")]
     private $threads;
 

@@ -1,0 +1,19 @@
+{% if threads is not empty %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for thread in threads %}
+            <div class="col">
+                <!-- Your thread card HTML -->
+            </div>
+        {% else %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text">No records found</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No threads found.</p>
+{% endif %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Topics;
 use App\Entity\Votes;
 use App\Form\VotesType;
 use App\Entity\Replies;
@@ -13,9 +14,14 @@ use App\Repository\ThreadsRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use GuzzleHttp\Client;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+
 
 #[Route('/threads')]
 class ThreadsController extends AbstractController
@@ -28,15 +34,56 @@ class ThreadsController extends AbstractController
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->userRepository = $entityManager->getRepository(User::class);
-        $this->user = $this->userRepository->findOneBy(['userId' => 1]); // Adjust the condition as per your user entity
+        $this->user = $this->userRepository->findOneBy(['userId' => 4]); // Adjust the condition as per your user entity
     }
 
 
+
     #[Route('/', name: 'app_threads_index', methods: ['GET'])]
-    public function index(ThreadsRepository $threadsRepository): Response
+    public function index(Request $request, ThreadsRepository $threadsRepository, PaginatorInterface $paginator, EntityManagerInterface $entityManager): Response
     {
+        // Fetch categories from the database
+        $topics = $entityManager->getRepository(Topics::class)->findAll();
+
+        // Get the selected category filter from the request
+        $selectedCategory = $request->query->get('category');
+
+        // Get the search term from the request
+        $searchTerm = $request->query->get('q');
+
+        // Get the sort order from the request
+        $sortOrder = $request->query->get('sortOrder', 'ASC');
+
+        // Fetch threads based on the selected category filter and search term
+        $threadsQuery = $threadsRepository->createQueryBuilder('t');
+
+        if ($selectedCategory) {
+            $threadsQuery->andWhere('t.category = :category')
+                ->setParameter('category', $selectedCategory);
+        }
+
+        if ($searchTerm) {
+            $threadsQuery->andWhere('t.title LIKE :searchTerm OR t.content LIKE :searchTerm')
+                ->setParameter('searchTerm', '%'.$searchTerm.'%');
+        }
+
+        // Apply sorting order
+        $threadsQuery->orderBy('t.createdAt', $sortOrder);
+
+        // Execute the query
+        $threadsQuery = $threadsQuery->getQuery();
+
+        // Paginate the results
+        $threads = $paginator->paginate(
+            $threadsQuery,
+            $request->query->getInt('page', 1),
+            6 // Items per page
+        );
+
         return $this->render('threads/index.html.twig', [
-            'threads' => $threadsRepository->findAll(),
+            'threads' => $threads,
+            'topics' => $topics,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
@@ -50,10 +97,17 @@ class ThreadsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($thread);
-            $entityManager->flush();
+            // Check if content is bad
+            $content = $form->get('content')->getData();
+            if ($this->isBadContent($content)) {
+                // Display alert to the user
+                $this->addFlash('danger', 'Your content contains inappropriate words. Please modify it.');
+            } else {
+                $entityManager->persist($thread);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('app_threads_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_threads_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('threads/new.html.twig', [
@@ -76,6 +130,7 @@ class ThreadsController extends AbstractController
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            
             $entityManager->persist($reply);
             $entityManager->flush();
             return $this->redirect($request->getUri());
@@ -144,7 +199,9 @@ class ThreadsController extends AbstractController
         return $this->render('threads/show.html.twig', [
             'thread' => $thread,
             'commentForm' => $commentForm->createView(),
-            'voteForm' => $voteForm->createView()
+            'voteForm' => $voteForm->createView(),
+            'currentUser' => $this->user, // Pass the current user to the template
+
 
         ]);
     }
@@ -201,5 +258,60 @@ class ThreadsController extends AbstractController
         return $this->redirectToRoute('app_threads_index');
     }
 
+    #[Route('/generate-title-ajax', name: 'generate_title_ajax', methods: ['POST'])]
+    public function generateTitleAjax(Request $request): JsonResponse
+    {
+        $content = $request->request->get('content');
+
+        $title = $this->chatGPTRequest($content);
+
+        // Return the generated title as JSON response
+        return new JsonResponse(['title' => $title]);
+    }
+
+    private function isBadContent($content)
+    {
+        $client = new Client([
+            'headers' => [
+                'X-RapidAPI-Host' => 'neutrinoapi-bad-word-filter.p.rapidapi.com',
+                'X-RapidAPI-Key' => '8433d15735msh2702a52a05e99bdp1e7f6djsn60b6c77343ce',
+                'content-type' => 'application/x-www-form-urlencoded    ',
+            ],
+        ]);
+
+        $response = $client->request('POST', 'https://neutrinoapi-bad-word-filter.p.rapidapi.com/bad-word-filter', [
+            'form_params' => [
+                'content' => $content,
+                'censor-character' => '*'
+            ]
+        ]);
+
+        $body = json_decode($response->getBody(), true);
+
+        // Check if the response indicates bad content
+        return $body['is-bad'];
+    }
+
+    function chatGPTRequest($content)
+    {
+        $client = new Client();
+
+        $response = $client->request('POST', 'https://chatgpt-api8.p.rapidapi.com/', [
+            'json' => [
+                [
+                    "content" => $content,
+                    "role" => "user"
+                ]
+            ],
+            'headers' => [
+                'X-RapidAPI-Host' => 'chatgpt-api8.p.rapidapi.com',
+                'X-RapidAPI-Key' => '8433d15735msh2702a52a05e99bdp1e7f6djsn60b6c77343ce',
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        $responseData = json_decode($response->getBody(), true);
+        return $responseData['text'];
+    }
 
 }

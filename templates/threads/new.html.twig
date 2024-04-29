@@ -8,6 +8,14 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
 
+                {% for flash_message in app.flashes('danger') %}
+                    <div class="alert alert-danger">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+
+
+
                 {% if form_errors(form.title) %}
                     <div class="alert alert-danger">
                         <p> {{ form_errors(form.title) }}</p>
@@ -23,12 +31,12 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="mt-4">Create New Thread</h1>
+                        <h1 class="mt-4 mb-4">Create New Thread</h1>
 
                         {{ form_start(form) }}
 
                         <div class="mb-3">
-                            {{ form_label(form.title) }}
+                            <p class="space-between"> {{ form_label(form.title) }}  <a href="#" id="generate-title-btn">Generate Title with Ai</a></p>
                             {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                         </div>
 
@@ -61,4 +69,65 @@
         </div>
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+    <script>
+        document.getElementById('generate-title-btn').addEventListener('click', function() {
+            // Get CKEditor instance
+            var editor = CKEDITOR.instances.threads_content;
+
+            if (editor) {
+                // Get the content from CKEditor
+                var content = editor.getData();
+
+                // Call chatGPTRequest function with the content
+                chatGPTRequest(content);
+            } else {
+                console.error('CKEditor instance not found');
+            }
+        });
+
+        function chatGPTRequest(content) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://chatgpt-api8.p.rapidapi.com/', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-RapidAPI-Host', 'chatgpt-api8.p.rapidapi.com');
+            xhr.setRequestHeader('X-RapidAPI-Key', '8433d15735msh2702a52a05e99bdp1e7f6djsn60b6c77343ce');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Extract the generated title from the response
+                        var responseData = JSON.parse(xhr.responseText);
+                        var title = responseData.text.replace(/"/g, '');
+                        // Check if the title is not null or empty
+                        if (title) {
+                            // Update the form field with the generated title
+                            document.getElementById('threads_title').value = title;
+
+                        } else {
+                            console.error('Generated title is null or empty');
+                        }
+                    } else {
+                        console.error('Error:', xhr.statusText);
+                    }
+                }
+            };
+            xhr.send(JSON.stringify([{ "content": "Give me thread title for this article(Direct output only make it short and without quotations):"+content, "role": "user" }]));
+        }
+    </script>
+<style>
+
+    #generate-title-btn{    background: linear-gradient(90deg, rgba(241, 114, 169, 1) 0%, rgba(98, 162, 237, 1) 100%);
+        color: white;
+        padding: .25em 1rem;
+        border-radius: .5em;}
+
+    .space-between{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;}
+</style>
+
+
 {% endblock %}

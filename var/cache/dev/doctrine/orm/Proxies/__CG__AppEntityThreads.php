@@ -133,7 +133,7 @@ class Threads extends \App\Entity\Threads implements \Doctrine\ORM\Proxy\Proxy
      * {@inheritDoc}
      * @internal generated method: use only when explicitly handling proxy specific loading logic
      */
-    public function __setInitializer(\Closure $initializer = null): void
+    public function __setInitializer(?\Closure $initializer = null): void
     {
         $this->__initializer__ = $initializer;
     }
@@ -151,7 +151,7 @@ class Threads extends \App\Entity\Threads implements \Doctrine\ORM\Proxy\Proxy
      * {@inheritDoc}
      * @internal generated method: use only when explicitly handling proxy specific loading logic
      */
-    public function __setCloner(\Closure $cloner = null): void
+    public function __setCloner(?\Closure $cloner = null): void
     {
         $this->__cloner__ = $cloner;
     }
@@ -399,6 +399,28 @@ class Threads extends \App\Entity\Threads implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'countVotesAsString', []);
 
         return parent::countVotesAsString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function upvotes(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'upvotes', []);
+
+        return parent::upvotes();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function downvotes(): string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'downvotes', []);
+
+        return parent::downvotes();
     }
 
 }
