@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Projects</h1>
+
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description }}</p>
+                    <p class="card-text">Category: {{ project.Categories.name }}</p>
+                    <a href="{{ path('app_project_show', {'id': project.id}) }}" class="btn btn-primary mr-2">Show</a>
+                    <a href="{{ path('app_project_edit', {'id': project.id}) }}" class="btn btn-warning mr-2">Update</a>
+                    <form action="{{ path('app_project_delete', {'id': project.id}) }}" method="post" style="display: inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

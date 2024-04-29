@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +55,59 @@ class Votes
      * })
      */
     private $post;
+
+    public function getVoteId(): ?int
+    {
+        return $this->voteId;
+    }
+
+    public function getVoteType(): ?string
+    {
+        return $this->voteType;
+    }
+
+    public function setVoteType(string $voteType): static
+    {
+        $this->voteType = $voteType;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPost(): ?Threads
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Threads $post): static
+    {
+        $this->post = $post;
+
+        return $this;
+    }
 
 
 }

@@ -28,5 +28,22 @@ class Topics
      */
     private $categoryName;
 
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function getCategoryName(): ?string
+    {
+        return $this->categoryName;
+    }
+
+    public function setCategoryName(string $categoryName): static
+    {
+        $this->categoryName = $categoryName;
+
+        return $this;
+    }
+
 
 }

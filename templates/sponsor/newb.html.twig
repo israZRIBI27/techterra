@@ -1,0 +1,15 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Create new Sponsor{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <h1>Create new Sponsor</h1>
+    </div>
+
+    {{ include('sponsor/_form.html.twig', {'button_label': 'Create'}) }}
+
+    <a href="{{ path('app_sponsor_list') }}" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Back to List
+    </a>
+{% endblock %}

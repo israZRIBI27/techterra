@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -92,20 +94,7 @@ class User
      */
     private $idProduct = array();
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Events", inversedBy="user")
-     * @ORM\JoinTable(name="participation",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="id_event", referencedColumnName="id_event")
-     *   }
-     * )
-     */
-    private $idEvent = array();
+
 
     /**
      * Constructor
@@ -113,7 +102,134 @@ class User
     public function __construct()
     {
         $this->idProduct = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->idEvent = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function getUserUsername(): ?string
+    {
+        return $this->userUsername;
+    }
+
+    public function setUserUsername(string $userUsername): static
+    {
+        $this->userUsername = $userUsername;
+
+        return $this;
+    }
+
+    public function getUserEmail(): ?string
+    {
+        return $this->userEmail;
+    }
+
+    public function setUserEmail(string $userEmail): static
+    {
+        $this->userEmail = $userEmail;
+
+        return $this;
+    }
+
+    public function getUserPassword(): ?string
+    {
+        return $this->userPassword;
+    }
+
+    public function setUserPassword(string $userPassword): static
+    {
+        $this->userPassword = $userPassword;
+
+        return $this;
+    }
+
+    public function getUserFirstname(): ?string
+    {
+        return $this->userFirstname;
+    }
+
+    public function setUserFirstname(string $userFirstname): static
+    {
+        $this->userFirstname = $userFirstname;
+
+        return $this;
+    }
+
+    public function getUserLastname(): ?string
+    {
+        return $this->userLastname;
+    }
+
+    public function setUserLastname(string $userLastname): static
+    {
+        $this->userLastname = $userLastname;
+
+        return $this;
+    }
+
+    public function getUserBirthday(): ?string
+    {
+        return $this->userBirthday;
+    }
+
+    public function setUserBirthday(string $userBirthday): static
+    {
+        $this->userBirthday = $userBirthday;
+
+        return $this;
+    }
+
+    public function getUserGender(): ?string
+    {
+        return $this->userGender;
+    }
+
+    public function setUserGender(string $userGender): static
+    {
+        $this->userGender = $userGender;
+
+        return $this;
+    }
+
+    public function getUserPicture(): ?string
+    {
+        return $this->userPicture;
+    }
+
+    public function setUserPicture(string $userPicture): static
+    {
+        $this->userPicture = $userPicture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getIdProduct(): Collection
+    {
+        return $this->idProduct;
+    }
+
+    public function addIdProduct(Product $idProduct): static
+    {
+        if (!$this->idProduct->contains($idProduct)) {
+            $this->idProduct->add($idProduct);
+        }
+
+        return $this;
+    }
+
+    public function removeIdProduct(Product $idProduct): static
+    {
+        $this->idProduct->removeElement($idProduct);
+
+        return $this;
+    }
+
+
+    #[ORM\OneToMany(targetEntity: Reponse::class, mappedBy: 'Project')]
+    private Collection $Project;
 }

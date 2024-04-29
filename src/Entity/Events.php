@@ -2,80 +2,164 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\EventsRepository;
 
-/**
- * Events
- *
- * @ORM\Table(name="events")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: EventsRepository::class)]
 class Events
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_event", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idEvent;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+  
+    private ?int $idEvent = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titreEvent", type="string", length=255, nullable=false)
-     */
-    private $titreevent;
+    #[ORM\Column(type: "string", length: 15)]
+    #[Assert\NotBlank]
+   private  $titreevent;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: "string", length: 15)]
+    #[Assert\NotBlank]
     private $type;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date", type="string", length=255, nullable=false)
-     */
-    private $date;
+    #[ORM\Column(type: "string", length: 15)]
+    #[Assert\NotBlank]
+    private string $date;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="lieu", type="string", length=255, nullable=true)
-     */
-    private $lieu;
+    #[ORM\Column(type: "string", length: 15)]
+    #[Assert\NotBlank]
+    private  $lieu;
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=true)
-     */
-    private $prix;
+    #[ORM\Column(type: "float")]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+    private float $prix;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="nb_max", type="integer", nullable=true)
-     */
-    private $nbMax;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Positive]
+   
+    private ?int $nbMax = null;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="idEvent")
-     */
-    private $user = array();
+    #[ORM\OneToMany(targetEntity: Sponsor::class, mappedBy: 'sponsor')]
+    private Collection $sponsors;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sponsors = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
+    public function getIdEvent(): ?int
+    {
+        return $this->idEvent;
+    }
+
+    public function getTitreevent(): ?string
+    {
+        return $this->titreevent;
+    }
+
+    public function setTitreevent(string $titreevent): static
+    {
+        $this->titreevent = $titreevent;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?string $lieu): static
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getNbMax(): ?int
+    {
+        return $this->nbMax;
+    }
+
+    public function setNbMax(?int $nbMax): static
+    {
+        $this->nbMax = $nbMax;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sponsor[]
+     */
+    public function getSponsors(): Collection
+    {
+        return $this->sponsors;
+    }
+
+    public function addSponsor(Sponsor $sponsor): self
+    {
+        if (!$this->sponsors->contains($sponsor)) {
+            $this->sponsors[] = $sponsor;
+            $sponsor->setIdevenement($this);
+        }
+    
+        return $this;
+    }
+    
+    public function removeSponsor(Sponsor $sponsor): self
+    {
+        if ($this->sponsors->removeElement($sponsor)) {
+            // set the owning side to null (unless already changed)
+            if ($sponsor->getIdevenement() === $this) {
+                $sponsor->setIdevenement(null);
+            }
+        }
+    
+        return $this;
+    }
 }

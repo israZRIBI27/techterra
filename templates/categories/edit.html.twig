@@ -1,0 +1,20 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Edit Categories{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Edit Categories</h1>
+
+    {{ include('categories/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_categories_index') }}" class="btn btn-secondary mt-3">Back to List</a>
+
+    <hr>
+
+    <form action="{{ path('app_categories_delete', {'id': category.id}) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger">Delete Category</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4 text-center">Events</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdEvent</th>
+                <td>{{ event.idEvent }}</td>
+            </tr>
+            <tr>
+                <th>Titreevent</th>
+                <td>{{ event.titreevent }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ event.type }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ event.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ event.prix }}</td>
+            </tr>
+            <tr>
+                <th>NbMax</th>
+                <td>{{ event.nbMax }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center"> <!-- Div pour centrer les boutons -->
+        <a href="{{ path('app_events_list') }}" class="btn btn-secondary">Back to List</a>
+
+        <a href="{{ path('app_events_editb', {'idEvent': event.idEvent}) }}" class="btn btn-primary">Edit</a>
+
+        {{ include('events/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
