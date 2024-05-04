@@ -203,7 +203,7 @@ public function panierStatistics(PanierRepository $panierRepository): Response
     }
 
     #[Route('/panier/pdf/', name: 'panier_pdf')]
-public function generatePanierPdf(Panier $panier = null, PdfService $pdf,)
+public function generatePanierPdf(Panier $panier = null, PdfService $pdf)
 {
 
     $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();

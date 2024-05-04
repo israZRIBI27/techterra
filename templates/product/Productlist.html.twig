@@ -5,6 +5,8 @@
 {% block title %}Products{% endblock %}
 
 {% block body %}
+
+
 <div class="row">
     <h3>Our Market</h3>
     {% for product in Products %}
@@ -16,6 +18,7 @@
                 <p class="card-text">Description: {{ product.description }}</p>
                 <p class="card-text">Price: {{ product.price }}</p>
                 <p class="card-text">Quantity: {{ product.quantity }}</p>
+                
                 <a href ="{{ path('Product_update', {'id': product.id}) }}" class="btn btn-primary">Update</a> 
                 <a href ="{{ path('Product_delete', {'id': product.id}) }}" class="btn btn-primary">Delete</a> 
                 <button class="btn btn-primary" onclick="addToCart({{ product.id }}, {{ product.quantity }})">Add to cart</button>
@@ -57,5 +60,42 @@
         });
     }
 </script>
+{{ knp_pagination_render(Products) }} <!-- Render pagination controls for products -->
+<style>
+   span{margin: 0;padding: 0;}
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            gap:.25em;
+        }
 
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination .current {
+            font-weight: bold;
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-top: -7px;            }
+</style>
 {% endblock %}
