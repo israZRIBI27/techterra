@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Project Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 70%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Details</h1>
+        <table>
+            {% if project is not null %}
+                <tr>
+                    <th>Title</th>
+                    <td>{{ project.title }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ project.description }}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    {% if project.Categories is not null %}
+                        <td>{{ project.Categories.name }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>File</th>
+                    <td>{{ project.projetFich }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">No project found</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+</body>
+</html>

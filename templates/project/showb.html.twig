@@ -1,0 +1,38 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}Project Details{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Project Details</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">ID</th>
+                <td>{{ project.id }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Title</th>
+                <td>{{ project.title }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td>{{ project.description }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Category</th>
+                <td>{{ project.categories.name }}</td>
+            </tr>
+              <tr>
+                                    <th scope="row">Projet File</th>
+                                    <td>{{ project.projetFich }}</td>
+                                </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_project_list') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+    <a href="{{ path('app_project_editb', {'id': project.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+    {% include 'project/_deleteb_form.html.twig' with {'button_label': 'Delete'} %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'baseb.html.twig' %}
+
+{% block title %}New Categories{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">Add new Category</h1>
+
+                <div class="container">
+                    {{ include('categories/_form.html.twig') }}
+                </div>
+
+                <a href="{{ path('app_categories_index') }}" class="btn btn-secondary mt-3">Back to list</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

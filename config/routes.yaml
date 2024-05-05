@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+search_projects:
+    path: /search
+    controller: App\Controller\ProjectController::searchProjects
+# config/routes.yaml
+app_project_pdf:
+    path: /project/pdf
+    controller: App\Controller\ProjectController::generatePdf
