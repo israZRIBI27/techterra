@@ -1,0 +1,265 @@
+{% extends "backendbase.html.twig" %}
+{% block title %}
+	Dashboard
+{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+		<div class="row mb-5" style="justify-content: space-evenly">
+	<div class="col-lg-3 col-sm-6">
+
+		<h2>User Gender Statistics:</h2>
+		<canvas id="genderChart" width="400" height="400"></canvas>
+	</div>
+
+	<div class="col-lg-3 col-sm-6">
+		<h2>Verification Statistics :</h2>
+    	<canvas id="verificationChart" width="400" height="400"></canvas>
+	</div>
+
+	</div>
+		</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('genderChart').getContext('2d');
+            var genderChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Male', 'Female'],
+                    datasets: [
+                        { label: 'Gender Distribution', data: [
+                            {{ user_gender_statistics.male_count }}, {{ user_gender_statistics.female_count }}
+                            ],
+                            backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)']
+                        }
+                    ]
+                },
+                options: { // Add any Chart.js options here
+                }
+            });
+            });
+	</script>
+
+
+	<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx = document.getElementById('verificationChart').getContext('2d');
+            var verificationChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Vérifié', 'Non vérifié'],
+                    datasets: [{
+                        label: 'Statut de vérification des utilisateurs',
+                        data: [
+                            {{ user_verification_statistics.verified_count }},
+                            {{ user_verification_statistics.unverified_count }}
+                        ],
+                        backgroundColor: [
+                            'rgba(0, 100, 0, 0.5)', // Vert foncé pour les utilisateurs vérifiés
+                            'rgba(139, 0, 0, 0.5)' // Rouge foncé pour les utilisateurs non vérifiés
+                        ]
+                    }]
+                },
+                options: {
+                    // Ajoutez ici d'autres options de Chart.js si nécessaire
+                }
+            });
+        });
+    </script>
+
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="stat-widget-two card-body">
+						<div class="stat-content">
+							<div class="stat-text">Total Users
+							</div>
+							<div class="stat-digit">
+								5
+							</div>
+						</div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-success w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="stat-widget-two card-body">
+						<div class="stat-content">
+							<div class="stat-text">Total Income from selling products</div>
+							<div class="stat-digit">
+								<i class="fab fa-usd"></i>20</div>
+						</div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-primary w-20" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="stat-widget-two card-body">
+						<div class="stat-content">
+							<div class="stat-text">Total Projects uploaded</div>
+							<div class="stat-digit">
+								70</div>
+						</div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-warning w-70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card">
+					<div class="stat-widget-two card-body">
+						<div class="stat-content">
+							<div class="stat-text">Total threads</div>
+							<div class="stat-digit">
+								650</div>
+						</div>
+						<div class="progress">
+							<div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+					</div>
+				</div>
+				<!-- /# card -->
+			</div>
+			<!-- /# column -->
+		
+		
+
+
+				<!-- /# card -->
+			</div>
+			
+		</div>
+		<div class="row">
+			
+			<div class="col-xl-12 col-xxl-6 col-lg-6 col-md-12">
+				<div class="row">
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6 col-md-6">
+						<div class="card">
+							<div class="social-graph-wrapper widget-facebook">
+								<span class="s-icon">
+									<i class="fab fa-facebook"></i>
+								</span>
+							</div>
+							<div class="row">
+								<div class="col-6 border-right">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">89</span>
+											k</h4>
+										<p class="m-0">Friends</p>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">119</span>
+											k</h4>
+										<p class="m-0">Followers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6 col-md-6">
+						<div class="card">
+							<div class="social-graph-wrapper widget-linkedin">
+								<span class="s-icon">
+									<i class="fab fa-linkedin"></i>
+								</span>
+							</div>
+							<div class="row">
+								<div class="col-6 border-right">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">89</span>
+											k</h4>
+										<p class="m-0">Friends</p>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">119</span>
+											k</h4>
+										<p class="m-0">Followers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6 col-md-6">
+						<div class="card">
+							<div class="social-graph-wrapper widget-googleplus">
+								<span class="s-icon">
+									<i class="fab fa-google-plus"></i>
+								</span>
+							</div>
+							<div class="row">
+								<div class="col-6 border-right">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">89</span>
+											k</h4>
+										<p class="m-0">Friends</p>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">119</span>
+											k</h4>
+										<p class="m-0">Followers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-6 col-sm-6 col-xxl-6 col-md-6">
+						<div class="card">
+							<div class="social-graph-wrapper widget-twitter">
+								<span class="s-icon">
+									<i class="fab fa-twitter"></i>
+								</span>
+							</div>
+							<div class="row">
+								<div class="col-6 border-right">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">89</span>
+											k</h4>
+										<p class="m-0">Friends</p>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="pt-3 pb-3 pl-0 pr-0 text-center">
+										<h4 class="m-1">
+											<span class="counter">119</span>
+											k</h4>
+										<p class="m-0">Followers</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!-- Vectormap -->
+
+
+{% endblock %}

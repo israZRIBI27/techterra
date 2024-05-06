@@ -1,0 +1,78 @@
+{# templates/panier/PanierList.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Panier</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+
+                    <th>Product Name</th>  
+                    <th>Price</th>   
+                    <th>Quantity</th>
+                    <th>Total Price</th>  {# Add a new column for total price #}
+                    <th>Action</th> {# Add a new column for action (e.g., delete) #}
+                </tr>
+            </thead>
+            <tbody>
+                {% set totalPrice = 0 %}
+                {% for item in paniers %}
+                    <tr>
+                        <td>{{ item.idProduit.name }}</td>
+                        <td>
+                            {% if item.price > 100 %}
+                                {{ item.price * 0.85 }} {# Apply 15% discount if price > 100 #}
+                            {% else %}
+                                {{ item.price }}
+                            {% endif %}
+                        </td>
+                        <td>{{ item.quantite }}</td>
+                        <td>
+                            {% if item.price > 100 %}
+                                {{ (item.price * 0.85) * item.quantite }} {# Calculate total price with discount #}
+                            {% else %}
+                                {{ item.price * item.quantite }}
+                            {% endif %}
+                        </td>
+                        {% set totalPrice = totalPrice + ((item.price > 100 ? item.price * 0.85 : item.price) * item.quantite) %}
+                        <td>
+                            <form action="{{ path('Panier_delete', {'id': item.idPanier}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this item?')">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p class="font-weight-bold">Total Price: {{ totalPrice }}</p>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{{ path('app_pay') }}" class="btn btn-primary">Proceed to Payment</a>
+            <a href="{{ path('Product_show') }}" class="btn btn-secondary ml-2">Show List of Products</a>
+        </div>
+    </div>
+
+    <hr>
+    <div>
+    <a href="{{ path('panier_pdf') }}" class="btn btn-primary">Generate PDF for cart</a>
+</div>
+
+
+    {# Form to send SMS #}
+    <form action="{{ path('send_sms') }}" method="post" class="mt-4">
+        <div class="form-group">
+            <label for="number">Recipient's Phone Number:</label>
+            <input type="text" name="number" id="number" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Send SMS</button>
+    </form>
+{% endblock %}

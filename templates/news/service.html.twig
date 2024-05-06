@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités les plus vues{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-light py-5">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-7" style="width:100%;">
+                    <div class="row g-4">
+                        {% for news in news %}
+                            <div class="col-md-6">
+                                <div class="row g-4">
+                                    <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
+                                        <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                            <h5 class="mb-0">{{ news.title }}</h5>
+                                            <small>{{ news.author }} & {{ news.time ? news.time|date('Y-m-d H:i:s') : '' }}</small>
+                                            <p>{{ news.content }}</p>
+                                            <a class="btn btn-primary rounded-pill px-4" href="{{ path('app_news_show', {'id': news.idNews}) }}">Check Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Bouton pour vérifier le flux RSS -->
+                <div class="col-lg-5">
+                    <a href="{{ path('check_my_rss_feed') }}" class="btn btn-primary">Verify RSS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <!-- Ne semble pas nécessaire si vous ne souhaitez pas paginer les actualités les plus vues -->
+
+    <!-- Retour en haut -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
+{% endblock %}

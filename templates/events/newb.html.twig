@@ -1,0 +1,49 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}New Events{% endblock %}
+
+{% block body %}
+<div class="content-body" style="min-height: 1100px;">
+<div class="container-fluid">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Create New Event</h1>
+
+                        {{ form_start(form, {'attr': {'class': 'my-form'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.titreevent, 'Titre Event', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.titreevent, {'attr': {'class': 'form-control', 'placeholder': 'Enter event title'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.type, 'Type', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.type, {'attr': {'class': 'form-control', 'placeholder': 'Enter event type'}}) }}
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form_label(form.lieu, 'Lieu', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.lieu, {'attr': {'class': 'form-control', 'placeholder': 'Enter event location'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.prix, 'Prix', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.prix, {'attr': {'class': 'form-control', 'placeholder': 'Enter event price'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.nbMax, 'Nombre Max', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.nbMax, {'attr': {'class': 'form-control', 'placeholder': 'Enter max number'}}) }}
+                            </div>
+                        
+                            <div class="text-center"> <!-- Ajout de la classe text-center -->
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

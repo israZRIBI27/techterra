@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News RSS Feed{% endblock %}
+
+{% block body %}
+    <div class="rss-feed">
+        {% if rssFeeds is defined %}
+            {% for rss in rssFeeds %}
+                <div class="rss-feed-group">
+                    <h3>Feed: {{ rss.channel.title }}</h3>
+                    {% for item in rss.channel.item|slice(0, 5) %}
+                        <div class="rss-item">
+                            <h2><a href="{{ item.link }}">{{ item.title }}</a></h2>
+                            <p>{{ item.pubDate|date("M, d Y") }}</p>
+                            <p>{{ item.description|raw }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            {# Render the RSS URL input form if RSS feeds are not yet loaded #}
+            <form action="{{ path('save_rss_url') }}" method="post">
+                <label for="rss_url">Enter RSS Feed URL:</label>
+                <input type="text" id="rss_url" name="rss_url">
+                <button type="submit">Save RSS URL</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

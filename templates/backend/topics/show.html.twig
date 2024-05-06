@@ -1,0 +1,27 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Topics{% endblock %}
+
+{% block body %}
+    <h1>Topics</h1>
+
+    <div class="card">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CategoryId</th>
+                <td>{{ topic.categoryId }}</td>
+            </tr>
+            <tr>
+                <th>CategoryName</th>
+                <td>{{ topic.categoryName }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <a href="{{ path('app_backend_topics_index') }}">back to list</a>
+
+    <a href="{{ path('app_backend_topics_edit', {'categoryId': topic.categoryId}) }}">edit</a>
+
+    {{ include('topics/_delete_form.html.twig') }}
+{% endblock %}

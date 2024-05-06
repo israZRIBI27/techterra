@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+{% block title %}Threads Index{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">Threads Index</h1>
+
+        <div class="row">
+            <div class="col-lg-9">
+                {% if threads is not empty %}
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        {% for thread in threads %}
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <i class="fa-regular fa-calendar"></i>  {{ thread.createdAt ? thread.createdAt|date('Y-m-d') : '' }}<br>
+                                        <a href="{{ path('threads_show', {'threadId': thread.threadId}) }}" class="card-title fs-4 fw-bold">{{ thread.title }}</a>
+                                        <p class="card-text">
+                                            {% if thread.content|length > 100 %}
+
+                                                {{ thread.content|slice(0, 100)|striptags ~ '...' }}
+
+                                            {% else %}
+
+                                                {{ thread.content |striptags }}
+
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                      
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                                            {% if thread.user == app.user.getUserUsername %}
+
+                                            <a href="{{ path('app_threads_edit', {'threadId': thread.threadId}) }}" class="btn btn-secondary">Edit</a>
+
+                                            {% endif %}
+                                        
+                                            {% if thread.category is not null %}
+
+                                                <a href="{{ path('app_threads_index', {'category': thread.category.categoryId}) }}" class="text-decoration-none">
+                                                    <p class="text-light" style="background: #585858;width: fit-content;border-radius: 10px;padding: 0.525em .5em;display: inline;">{{ thread.category }}</p>
+                                                </a>
+
+                                            {% endif %}
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    <p>No threads found.</p>
+                {% endif %}
+                <div class="container-sm mt-5">
+                    {{ knp_pagination_render(threads) }}
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <a href="{{ path('app_threads_new') }}" class="addbtn"><i class="fa-regular fa-square-plus"></i>Add Yours</a>
+                <div class="card mb-4" style="background: #f9f9f9;">
+                    <div class="card-body">
+                        <h5 class="card-title">Search, Sort, and Filter</h5>
+                        <form action="{{ path('app_threads_index') }}" method="GET">
+                            <div class="mb-3">
+                                <input type="text" id="search-input" name="q" class="form-control" placeholder="Search threads..." value="{{ app.request.query.get('q') }}">
+                            </div>
+                            <div class="mb-3">
+                                <select name="category" class="form-select">
+                                    <option value="">All Categories</option>
+                                    {% for topic in topics %}
+                                        <option value="{{ topic.categoryId }}" {% if selectedCategory == topic.categoryId %}selected{% endif %}>{{ topic.categoryName }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <select name="sortOrder" class="form-select">
+                                    <option value="ASC" {% if app.request.query.has('sortOrder') and app.request.query.get('sortOrder') == 'ASC' %}selected{% endif %}>Ascending</option>
+                                    <option value="DESC" {% if app.request.query.has('sortOrder') and app.request.query.get('sortOrder') == 'DESC' %}selected{% endif %}>Descending</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <a class="btn btn-outline-secondary" href="{{ path('app_threads_index') }}">Reset</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        span{margin: 0;padding: 0;}
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            gap:.25em;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination .current {
+            font-weight: bold;
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-top: -7px;            
+        }
+
+        .addbtn{    
+            width: 100%;
+            padding: 1rem;
+            color: #f8f8f8;
+            border-radius: .5em;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background: linear-gradient(90deg, rgba(241, 114, 169, 1) 0%, rgba(98, 162, 237, 1) 100%);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% endblock %}

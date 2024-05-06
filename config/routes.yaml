@@ -1,0 +1,25 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_news_show:
+    path: /news/{id}
+    controller: App\Controller\NewsController::show
+    methods: ['GET']
+feed_feed:
+    path: /feed
+    controller: App\Controller\RssFeedController::index
+    methods: ['GET']
+
+app_news_about:
+    path: /news/about
+    controller: App\Controller\NewsController::about
+    methods: ['GET']
+
+search_projects:
+    path: /search
+    controller: App\Controller\ProjectController::searchProjects
+
+app_project_pdf:
+    path: /project/pdf
+    controller: App\Controller\ProjectController::generatePdf

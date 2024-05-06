@@ -1,0 +1,34 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Topics index{% endblock %}
+
+{% block body %}
+    <h1>Topics index</h1>
+    <div class="card">
+       
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CategoryName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr>
+                <td>{{ topic.categoryName }}</td>
+                <td>
+                    <a class="btn btn-danger" href ="{{path('topic_delete',{'id':topic.categoryId})}}">Delete</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <a class="btn btn-primary" href="{{ path('app_backend_topics_new') }}">Create new</a>
+{% endblock %}

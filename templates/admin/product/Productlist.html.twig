@@ -1,0 +1,30 @@
+{# templates/product/Productlist.html.twig #}
+
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Products{% endblock %}
+{% block body %}
+<h3>Our Market</h3>
+
+<div class="row">
+
+    {% for product in Products %}
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <img src="{{ asset('Images/product/' ~ product.image) }}" class="card-img-top" alt="Product Image" style="max-height: 200px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Description: {{ product.description }}</p>
+                <p class="card-text">Price: {{ product.price }}</p>
+                <p class="card-text">Quantity: {{ product.quantity }}</p>
+               <a href ="{{ path('Product_update', {'id': product.id}) }}" class="btn btn-primary">Update</a> 
+                <a href ="{{ path('Product_delete', {'id': product.id}) }}" class="btn btn-primary">Delete</a> 
+                <a href="{{ path('add_to_cart', {'id': product.id}) }}" class="btn btn-primary">Add to cart</a>
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

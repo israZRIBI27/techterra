@@ -1,0 +1,13 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Add RSS Link{% endblock %}
+
+{% block body %}
+    <h1>Add RSS Link</h1>
+    <form action="{{ path('admin_add_rss') }}" method="post">
+        <input type="text" name="rss_link" placeholder="Enter RSS link">
+        <button type="submit">Add</button>
+    </form>
+{% endblock %}

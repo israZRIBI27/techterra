@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Details{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="card-title mb-0">Project Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ID</th>
+                                    <td>{{ project.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Title</th>
+                                    <td>{{ project.title }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Description</th>
+                                    <td>{{ project.description }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Category</th>
+                                    <td>{{ project.categories.name }}</td>
+                                </tr>
+                                 <tr>
+                                    <th scope="row">Projet File</th>
+                                    <td>{{ project.projetFich }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_project_index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% for role in app.user.getRoles %}
+                        {% if role == "ROLE_ADMIN" %}   
+                        <a href="{{ path('app_project_edit', {'id': project.id}) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                        {% include 'project/_delete_form.html.twig' with {'button_label': 'Delete'} %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <!-- Button for generating PDF -->
+                        <a href="{{ path('app_project_pdf',{'id': project.id})}}" class="btn btn-secondary mb-3"><i class="fas fa-file-pdf"></i> Generate PDF</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

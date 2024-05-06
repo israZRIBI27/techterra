@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4 text-center">Events</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdEvent</th>
+                <td>{{ event.idEvent }}</td>
+            </tr>
+            <tr>
+                <th>Titreevent</th>
+                <td>{{ event.titreevent }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ event.type }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ event.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ event.prix }}</td>
+            </tr>
+            <tr>
+                <th>NbMax</th>
+                <td>{{ event.nbMax }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center"> <!-- Div pour centrer les boutons -->
+        <a href="{{ path('app_events_index') }}" class="btn btn-secondary">Back to List</a>
+
+        <a href="{{ path('app_events_edit', {'idEvent': event.idEvent}) }}" class="btn btn-primary">Edit</a>
+
+        {{ include('events/_delete_form.html.twig') }}
+    </div>
+
+
+    <center>
+    <div class="col-md-8 wow fadeIn" data-wow-delay="0.1s">
+    <iframe class="position-relative rounded w-100"
+        src="https://maps.google.com/maps?q={{ event.lieu }}&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+        frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+    </div>
+</center>
+
+{% endblock %}

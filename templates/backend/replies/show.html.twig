@@ -1,0 +1,29 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Replies{% endblock %}
+
+{% block body %}
+    <h1>Replies</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ReplyId</th>
+                <td>{{ reply.replyId }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ reply.content |raw }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ reply.createdAt ? reply.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_backend_replies_index') }}">back to list</a>
+
+
+    {{ include('/backend/replies/_delete_form.html.twig') }}
+{% endblock %}

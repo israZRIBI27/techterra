@@ -1,0 +1,55 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Events index{% endblock %}
+
+{% block body %}
+<div class="content-body" style="min-height: 1100px;">
+<div class="container-fluid">
+    <div class="container">
+        <h1 class="text-center mb-4">Event List</h1>
+        <div class="text-center"> 
+            <a href="{{ path('app_events_newb') }}" class="btn btn-success">Create new</a>
+                        
+
+        </div>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped mx-auto">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre Event</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Lieu</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">NbMax</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.titreevent }}</td>
+                            <td>{{ event.type }}</td>
+                            <td>{{ event.date }}</td>
+                            <td>{{ event.lieu }}</td>
+                            <td>{{ event.prix }}</td>
+                            <td>{{ event.nbMax }}</td>
+                            <td>
+                                <a href="{{ path('app_events_showb', {'idEvent': event.idEvent}) }}" class="btn btn-primary">Show</a>
+                                <a href="{{ path('app_events_editb', {'idEvent': event.idEvent}) }}" class="btn btn-secondary">Edit</a>
+                                <a href="{{ path('app_events_delete', {'idEvent': event.idEvent}) }}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center"> {# Centrer horizontalement la ligne #}
+            <div class="col-md-8">
+                <h1 class="text-center" style="font-family: Arial, sans-serif; font-size: 70px;">Liste de sponsors</h1>
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_sponsor_newb') }}" class="btn btn-success">Create new</a>
+                    <a href="{{ path('app_sponsor_export_excelb') }}" class="btn btn-success">export excel</a>
+                </div>
+
+                <div class="row mt-4 justify-content-center"> {# Centrer horizontalement la nouvelle ligne #}
+                    <div class="col">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Montant</th>
+                                    <th scope="col">Titre Event</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sponsor in sponsors %}
+                                    <tr>
+                                        <td>{{ sponsor.nom }}</td>
+                                        <td>{{ sponsor.montant }}</td>
+                                        <td>{{ sponsor.idevenement.titreevent }}</td>
+                                        <td>
+                                            <a href="{{ path('app_sponsor_show', {'id': sponsor.id}) }}" class="btn btn-primary">Show</a>
+                                            <a href="{{ path('app_sponsor_editb', {'id': sponsor.id}) }}" class="btn btn-secondary">Edit</a>
+                                            <a href="{{ path('app_sponsor_delete', {'id': sponsor.id}) }}" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+
+                                        <td colspan="4">No records found</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

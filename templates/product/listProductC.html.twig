@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+{% block javascripts %}
+    <script>
+        document.getElementById('currency').addEventListener('change', function() {
+            var currency = this.value;
+            var prixUnitaireCells = document.querySelectorAll('.price');
+
+            prixUnitaireCells.forEach(function(cell) {
+                var originalPriceTND = parseFloat(cell.dataset.originalPriceTnd);
+                if (!isNaN(originalPriceTND)) {
+                    var convertedPrice;
+                    switch (currency) {
+                        case 'TND':
+                            convertedPrice = originalPriceTND;
+                            break;
+                        case 'USD':
+                            convertedPrice = originalPriceTND * 0.36; // Conversion rate from TND to USD
+                            break;
+                        case 'Euro':
+                            convertedPrice = originalPriceTND * 0.30; // Conversion rate from TND to Euro
+                            break;
+                        case 'Yen':
+                            convertedPrice = originalPriceTND * 40.36; // Conversion rate from TND to Yen
+                            break;
+                        default:
+                            convertedPrice = originalPriceTND;
+                    }
+                    cell.textContent = convertedPrice.toFixed(2) + ' ' + currency;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block body %}
+<div class="row">
+
+
+<div style="display: flex;justify-content: space-between;">
+<h3>Our Market</h3>
+
+        
+
+
+        {# View Cart Button (conditionally animated) #}
+        <form action="{{ path('Panier_show') }}" method="get" class="mb-3">
+            <button type="submit" class="btn btn-primary mb-2 {% if panierNonVide %}animated{% endif %}">View Cart</button>
+        </form>
+
+</div> 
+
+
+        <form id="currencyForm">
+    <label for="currency">Change Currency:</label>
+    <select name="currency" id="currency">
+        <option value="TND">TND (Tunisian Dinar)</option>
+        <option value="USD">USD (US Dollar)</option>
+        <option value="Euro">Euro</option>
+        <option value="Yen">Yen</option>
+    </select>
+</form>
+
+
+        {# Search Form #}
+        <form action="{{ path('Product_show') }}" method="get" class="form-inline mb-3 mt-2">
+            <div class="form-group">
+                <input type="text" name="q" class="form-control" placeholder="Search by name...">
+            </div>
+            <button type="submit" class="btn btn-primary ml-2 mt-2">Search</button>
+        </form>
+        
+
+
+    <div class="col-md-12 mb-4" style="display: flex;gap: 2rem;flex-wrap: wrap;">
+        
+
+        {# Product Listing #}
+        {% for product in Products %}
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="{{ asset('Images/product/' ~ product.image) }}" class="card-img-top" alt="Product Image" style="max-height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Description: {{ product.description }}</p>
+
+                    {# Price Display with data attributes for dynamic conversion #}
+                    <p id="product-price-{{ product.id }}" class="card-text" data-price="{{ product.price }}" >
+                        {{ product.price }} DT <!-- Display original price in EUR format -->
+                    </p>
+
+                    <p class="card-text">Quantity: {{ product.quantity }}</p>
+
+                    
+
+                    <form action="{{ path('add_to_cart', {'id': product.id, 'quantity': 'quantity' ~ product.id }) }}" method="post">
+                        <div class="form-group">
+                            <label for="quantity{{ product.id }}">Quantity:</label>
+                            <input type="number" id="quantity{{ product.id }}" name="quantity" class="form-control" value="1" min="1" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{{ knp_pagination_render(Products) }} <!-- Render pagination controls for products -->
+<style>
+   span{margin: 0;padding: 0;}
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+            gap:.25em;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .pagination .current {
+            font-weight: bold;
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            margin-top: -7px;            }
+</style>
+{% endblock %}

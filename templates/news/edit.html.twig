@@ -1,0 +1,52 @@
+{% extends 'backendbase.html.twig' %}
+
+{% block title %}Edit News{% endblock %}
+
+{% block body %}
+<div style="    max-width: 600px;" >
+    <h1>Edit News</h1>
+
+       {% if form_errors(form.title) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.title) }}</p>
+                    </div>
+                {% endif %}
+  {% if form_errors(form.content) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.content) }}</p>
+                    </div>
+                {% endif %}
+ {% if form_errors(form.author) %}
+                    <div class="alert alert-danger">
+                        <p> {{ form_errors(form.author) }}</p>
+                    </div>
+                {% endif %}
+
+    {{ form_start(form, {'attr': {'id': 'news-form'}}) }}
+        <div class="form-group">
+            {{ form_label(form.title, 'Title') }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.author, 'Author') }}
+            {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.content, 'Content') }}
+            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+           
+            {{ form_widget(form.time, {'attr': {'class': 'form-control', 'style': 'display:none;'}}) }}
+        </div>
+
+  {{ form_widget(form) }}
+    <button class="btn btn-primary mr-2">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+<br>
+    <a  class="btn btn-primary mr-2" href="{{ path('app_news_indexAdmin') }}">Back to list</a>
+    </div>
+{% endblock %}
