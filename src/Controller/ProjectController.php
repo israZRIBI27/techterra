@@ -14,7 +14,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\ProjectRepository;
 use App\Service\PdfService;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+
 class ProjectController extends AbstractController
 {
 
@@ -90,8 +92,8 @@ class ProjectController extends AbstractController
     
     #[Route('/newb', name: 'app_project_newb', methods: ['GET', 'POST'])]
     public function newb(Request $request, ManagerRegistry $doctrine): Response
-    {
-        $em=$doctrine->getManager();
+    { 
+         $em=$doctrine->getManager();
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
@@ -110,7 +112,6 @@ class ProjectController extends AbstractController
     
             $em->persist($project);
             $em->flush();
-    
 
             return $this->redirectToRoute('app_project_list', [], Response::HTTP_SEE_OTHER);
         }
@@ -135,25 +136,43 @@ class ProjectController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
+        // Get the current file path
+        $currentFilePath = $project->getProjetFich();
+        // For updating a project
+$form = $this->createForm(ProjectType::class, $project, [
+    'disable_projet_fich' => true,
+]);
+        
+        // If there is a current file path, set it as the data for the file upload field
+        if ($currentFilePath) {
+            $project->setProjetFich(new File($this->getParameter('kernel.project_dir') . '/public/Uploads/' . $currentFilePath));
+        }
+    
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            $entityManager->persist($project);
-            
-            // Message spécifique pour la notification
-            $notificationMessage = "Le projet a été modifié avec succès.";
+            // Process the form submission and handle the file upload if a new file is selected
     
-            if ($request->isXmlHttpRequest()) {
-                // Si c'est une requête AJAX, retournez une réponse JSON avec le message spécifié
-                return $this->json(['success' => true, 'message' => $notificationMessage]);
+            // Check if a new file is uploaded
+            $newFile = $form->get('projet_fich')->getData();
+            if ($newFile instanceof File) {
+                // Process the new file upload
+                $uploads = $this->getParameter('kernel.project_dir') . '/public/Uploads';
+                $fileName = md5(uniqid()) . '.' . $newFile->guessExtension();
+                $newFile->move($uploads, $fileName);
+                $project->setProjetFich($fileName);
             }
     
-            // Si ce n'est pas une requête AJAX, redirigez vers la page de liste des projets
+            // No need to persist the project entity here, as it's already managed by Doctrine
+            $entityManager->flush();
+            
+            // Handle the response based on the request type (AJAX or non-AJAX)
+    
             return $this->redirectToRoute('app_project_index');
         }
     
@@ -162,10 +181,15 @@ class ProjectController extends AbstractController
             'form' => $form,
         ]);
     }
+    
+    
     #[Route('/{id}/editb', name: 'app_project_editb', methods: ['GET', 'POST'])]
     public function editb(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
+       // For updating a project
+        $form = $this->createForm(ProjectType::class, $project, [
+            'disable_projet_fich' => true,
+        ]); 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -190,10 +214,10 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
     }
-    #[Route('/{id}', name: 'app_project_deleteb', methods: ['POST'])]
+    #[Route('/{id}/deleteb', name: 'app_project_deleteb', methods: ['POST'])]
     public function deleteb(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('deleteb'.$project->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
             $entityManager->remove($project);
             $entityManager->flush();
         }
