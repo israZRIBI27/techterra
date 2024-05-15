@@ -376,13 +376,6 @@
         <argument type="service" id=".service_locator.mx0UMmY.App\Controller\AdminController"/>
       </call>
     </service>
-    <service id="App\Controller\ChartController" class="App\Controller\ChartController" public="true" autowire="true" autoconfigure="true">
-      <tag name="controller.service_arguments"/>
-      <tag name="container.service_subscriber"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.mx0UMmY.App\Controller\ChartController"/>
-      </call>
-    </service>
     <service id="App\Controller\PanierController" class="App\Controller\PanierController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -419,9 +412,6 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Service\PdfService" class="App\Service\PdfService" autowire="true" autoconfigure="true"/>
-    <service id="App\Service\QrcodeService" class="App\Service\QrcodeService" autowire="true" autoconfigure="true">
-      <argument type="service" id="Endroid\QrCode\Builder\Builder"/>
-    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -6548,9 +6538,6 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\AdminController" class="App\Controller\AdminController" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ChartController" class="App\Controller\ChartController" autowire="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ChartController" class="App\Controller\ChartController" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Controller\ChartController" class="App\Controller\ChartController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PanierController" class="App\Controller\PanierController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6950,13 +6937,6 @@
         <argument key="rep" type="service_closure" id="App\Repository\ProductRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.l3e3tDC" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="chartBuilder" type="service_closure" id="chartjs.builder"/>
-        <argument key="panierRepository" type="service_closure" id="App\Repository\PanierRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.Niycchk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7011,15 +6991,13 @@
         <argument key="rep" type="service_closure" id="App\Repository\ProductRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.15ylniv" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.4oTetr0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminController::show" type="service_closure" id=".service_locator.EBzUzud"/>
-        <argument key="App\Controller\ChartController::index" type="service_closure" id=".service_locator.l3e3tDC"/>
         <argument key="App\Controller\PanierController::addToCart" type="service_closure" id=".service_locator.Niycchk"/>
         <argument key="App\Controller\PanierController::deletePanier" type="service_closure" id=".service_locator.JJiO7pQ"/>
         <argument key="App\Controller\PanierController::generatePanierPdf" type="service_closure" id=".service_locator.4Uag9kt"/>
-        <argument key="App\Controller\PanierController::panierStatistics" type="service_closure" id=".service_locator.tsnEguG"/>
         <argument key="App\Controller\PanierController::paniers" type="service_closure" id=".service_locator.tsnEguG"/>
         <argument key="App\Controller\PanierController::show" type="service_closure" id=".service_locator.aqSwrgC"/>
         <argument key="App\Controller\ProductController::AddProduct" type="service_closure" id=".service_locator.GQZbvNR"/>
@@ -7031,11 +7009,9 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Controller\AdminController:show" type="service_closure" id=".service_locator.EBzUzud"/>
-        <argument key="App\Controller\ChartController:index" type="service_closure" id=".service_locator.l3e3tDC"/>
         <argument key="App\Controller\PanierController:addToCart" type="service_closure" id=".service_locator.Niycchk"/>
         <argument key="App\Controller\PanierController:deletePanier" type="service_closure" id=".service_locator.JJiO7pQ"/>
         <argument key="App\Controller\PanierController:generatePanierPdf" type="service_closure" id=".service_locator.4Uag9kt"/>
-        <argument key="App\Controller\PanierController:panierStatistics" type="service_closure" id=".service_locator.tsnEguG"/>
         <argument key="App\Controller\PanierController:paniers" type="service_closure" id=".service_locator.tsnEguG"/>
         <argument key="App\Controller\PanierController:show" type="service_closure" id=".service_locator.aqSwrgC"/>
         <argument key="App\Controller\ProductController:AddProduct" type="service_closure" id=".service_locator.GQZbvNR"/>
@@ -7474,12 +7450,6 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.mx0UMmY" method="withContext"/>
     </service>
-    <service id=".service_locator.mx0UMmY.App\Controller\ChartController" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="App\Controller\ChartController"/>
-      <argument>App\Controller\ChartController</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.mx0UMmY" method="withContext"/>
-    </service>
     <service id=".service_locator.mx0UMmY.App\Controller\PanierController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\PanierController"/>
       <argument>App\Controller\PanierController</argument>
@@ -7668,12 +7638,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.15ylniv"/>
+      <argument type="service" id=".service_locator.4oTetr0"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.15ylniv"/>
+      <argument type="service" id=".service_locator.4oTetr0"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8746,7 +8716,7 @@
     <service id="Endroid\QrCode\Builder\BuilderInterface $defaultQrCodeBuilder" alias="endroid_qr_code.default_builder"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.15ylniv"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.4oTetr0"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8773,7 +8743,7 @@
     <service id=".service_locator.hNlD3IN" alias=".service_locator.JJiO7pQ"/>
     <service id=".service_locator.7B6Ts8z" alias=".service_locator.7CJU70_"/>
     <service id=".service_locator.ubfueL6" alias=".service_locator.3DBU9FM"/>
-    <service id=".service_locator.Jp7KeC." alias=".service_locator.15ylniv"/>
+    <service id=".service_locator._Ue3a1." alias=".service_locator.4oTetr0"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.pcct.QH" alias=".service_locator.Z2ky6JU"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8802,7 +8772,6 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
     <service id=".service_locator.gsJDzp5" alias=".service_locator.EBzUzud"/>
-    <service id=".service_locator.fT2eEUw" alias=".service_locator.l3e3tDC"/>
     <service id=".service_locator.blzcdW_" alias=".service_locator.Niycchk"/>
     <service id=".service_locator.uMwFlv3" alias=".service_locator.aqSwrgC"/>
     <service id=".service_locator.rqMSy4R" alias=".service_locator.JJiO7pQ"/>

@@ -25,7 +25,7 @@ class AddProductType extends AbstractType
                 'required' => false, // Not required, as you may not always upload an image
                 'attr' => ['accept' => 'image/*'], // Allow only image files
             ])
-            ->add('quantity')
+            ->add('quantite')
             ;
             
     }

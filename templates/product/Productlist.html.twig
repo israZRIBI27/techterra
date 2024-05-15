@@ -17,11 +17,11 @@
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">Description: {{ product.description }}</p>
                 <p class="card-text">Price: {{ product.price }}</p>
-                <p class="card-text">Quantity: {{ product.quantity }}</p>
+                <p class="card-text">Quantite: {{ product.quantite }}</p>
                 
                 <a href ="{{ path('Product_update', {'id': product.id}) }}" class="btn btn-primary">Update</a> 
                 <a href ="{{ path('Product_delete', {'id': product.id}) }}" class="btn btn-primary">Delete</a> 
-                <button class="btn btn-primary" onclick="addToCart({{ product.id }}, {{ product.quantity }})">Add to cart</button>
+                <button class="btn btn-primary" onclick="addToCart({{ product.id }}, {{ product.quantite }})">Add to cart</button>
             </div>
         </div>
     </div>
@@ -30,9 +30,9 @@
 {{ knp_pagination_render(Products) }}
 
 <script>
-    function addToCart(productId, productQuantity) {
-        // Prompt the user if the product quantity is insufficient
-        if (productQuantity < 1) {
+    function addToCart(productId, productQuantite) {
+        // Prompt the user if the product quantite is insufficient
+        if (productQuantite < 1) {
             alert("Sorry, this product is out of stock.");
             return;
         }
@@ -44,7 +44,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ quantity: 1 }) // You can adjust the quantity here
+            body: JSON.stringify({ quantite: 1 }) // You can adjust the quantite here
         })
         .then(response => {
             if (!response.ok) {

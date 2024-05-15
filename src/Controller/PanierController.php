@@ -39,8 +39,8 @@ class PanierController extends AbstractController
     #[Route('/add_to_cart/{id}', name: 'add_to_cart')]
     public function addToCart(Request $request, Product $product, int $id, ProductRepository $productRepository): Response
     {
-        // Get the quantity from the request
-        $quantity = $request->request->getInt('quantity', 1);
+        // Get the quantite from the request
+        $quantite = $request->request->getInt('quantite', 1);
         $productEntity = $productRepository->find($id);
 
     
@@ -63,23 +63,23 @@ class PanierController extends AbstractController
     
         // Définir les valeurs statiques pour id_user et quantite
         $panier->setIdUser(1);
-        $panier->setQuantite($quantity);
+        $panier->setQuantite($quantite);
 
-        $newQuantity = $productEntity->getQuantity() - $quantity;
-        if ($newQuantity < 0) {
+        $newQuantite = $productEntity->getQuantite() - $quantite;
+        if ($newQuantite < 0) {
 
-            $this->addFlash('error', 'Insufficient quantity available for this product.');
+            $this->addFlash('error', 'Insufficient quantite available for this product.');
     
             // Redirect back to the previous page or panier list
             return $this->redirectToRoute('Panier_show');        }
-            // Update the product quantity in the database
-        $productEntity->setQuantity($newQuantity);
+            // Update the product quantite in the database
+        $productEntity->setQuantite($newQuantite);
     
         // Récupérer le prix du produit
         $prixProduit = $product->getPrice();
     
         // Calculer le prix total du panier
-        $panierPrice = $prixProduit * $quantity;
+        $panierPrice = $prixProduit * $quantite;
     
         // Associer le prix, le produit et l'identifiant du produit au panier
         $panier->setPrice($panierPrice);
@@ -163,7 +163,7 @@ public function sendSms(Request $request): Response
 
     } catch (\Exception $e) {
         // Log or handle the exception
-        // For debugging purposes, you can also output the exception message
+        // For  purposes, you can also output the exception message
         echo 'Error: ' . $e->getMessage();
 
         // Return error response
@@ -171,16 +171,7 @@ public function sendSms(Request $request): Response
     }
 }
 
-#[Route('/chart/chart', name: 'panier_statistics')]
-public function panierStatistics(PanierRepository $panierRepository): Response
-{
-    // Calculate Panier price statistics using custom repository method
-    $statistics = $panierRepository->calculatePriceStatistics();
 
-    return $this->render('chart/chart.html.twig', [
-        'statistics' => $statistics,
-    ]);
-}
 
 #[Route('/paniers', name: 'paniers')]
     public function paniers(PanierRepository $panierRepository): Response

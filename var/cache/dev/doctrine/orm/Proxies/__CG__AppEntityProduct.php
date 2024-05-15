@@ -67,10 +67,10 @@ class Product extends \App\Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'price', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'image', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'quantity'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'price', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'image', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'quantite'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'price', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'image', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'quantity'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'price', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'description', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'image', '' . "\0" . 'App\\Entity\\Product' . "\0" . 'quantite'];
     }
 
     /**
@@ -283,23 +283,23 @@ class Product extends \App\Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getQuantity(): ?int
+    public function getQuantite(): ?int
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getQuantity', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getQuantite', []);
 
-        return parent::getQuantity();
+        return parent::getQuantite();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setQuantity(int $quantity): static
+    public function setQuantite(int $quantite): static
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setQuantity', [$quantity]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setQuantite', [$quantite]);
 
-        return parent::setQuantity($quantity);
+        return parent::setQuantite($quantite);
     }
 
 }

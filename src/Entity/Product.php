@@ -44,9 +44,9 @@ class Product
 
 
     #[ORM\Column(type: "integer")]
-    #[Assert\NotBlank(message: "quantity is required")]
+    #[Assert\NotBlank(message: "quantite is required")]
 
-    private $quantity;
+    private $quantite;
 
 
     public function getId(): ?int
@@ -102,14 +102,14 @@ class Product
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getQuantite(): ?int
     {
-        return $this->quantity;
+        return $this->quantite;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantite(int $quantite): static
     {
-        $this->quantity = $quantity;
+        $this->quantite = $quantite;
 
         return $this;
     }

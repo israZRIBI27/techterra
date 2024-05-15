@@ -91,14 +91,14 @@
                         {{ product.price }} DT <!-- Display original price in EUR format -->
                     </p>
 
-                    <p class="card-text">Quantity: {{ product.quantity }}</p>
+                    <p class="card-text">Quantite: {{ product.quantite }}</p>
 
                     
 
-                    <form action="{{ path('add_to_cart', {'id': product.id, 'quantity': 'quantity' ~ product.id }) }}" method="post">
+                    <form action="{{ path('add_to_cart', {'id': product.id, 'quantite': 'quantite' ~ product.id }) }}" method="post">
                         <div class="form-group">
-                            <label for="quantity{{ product.id }}">Quantity:</label>
-                            <input type="number" id="quantity{{ product.id }}" name="quantity" class="form-control" value="1" min="1" required>
+                            <label for="quantite{{ product.id }}">Quantite:</label>
+                            <input type="number" id="quantite{{ product.id }}" name="quantite" class="form-control" value="1" min="1" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add to Cart</button>
                     </form>

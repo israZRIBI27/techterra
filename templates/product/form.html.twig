@@ -53,10 +53,10 @@
 
                             <div class="col-md-6 mb-3">
                                 <div class="formA-group">
-                                    {{ form_label(formA.quantity, 'Product quantity', {'label_attr': {'class': 'formA-label'}}) }}
-                                    {{ form_widget(formA.quantity, {'attr': {'class': 'formA-control', 'placeholder': 'Product quantity', 'required': true}}) }}
-                                    {% if form_errors(formA.quantity) %}
-                                        <div class="alert alert-danger">{{ form_errors(formA.quantity) }}</div>
+                                    {{ form_label(formA.quantite, 'Product quantite', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.quantite, {'attr': {'class': 'formA-control', 'placeholder': 'Product quantite', 'required': true}}) }}
+                                    {% if form_errors(formA.quantite) %}
+                                        <div class="alert alert-danger">{{ form_errors(formA.quantite) }}</div>
                                     {% endif %}
                                 </div>
                             </div>

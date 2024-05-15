@@ -115,9 +115,9 @@ class __TwigTemplate_852a1836af2e084ec263fa0b435e1dd0 extends Template
             // line 17
             yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "price", [], "any", false, false, false, 17), "html", null, true);
             yield "</p>
-                <p class=\"card-text\">Quantity: ";
+                <p class=\"card-text\">Quantite: ";
             // line 18
-            yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 18), "html", null, true);
+            yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantite", [], "any", false, false, false, 18), "html", null, true);
             yield "</p>
                <a href =\"";
             // line 19
@@ -196,7 +196,7 @@ class __TwigTemplate_852a1836af2e084ec263fa0b435e1dd0 extends Template
                 <h5 class=\"card-title\">{{ product.name }}</h5>
                 <p class=\"card-text\">Description: {{ product.description }}</p>
                 <p class=\"card-text\">Price: {{ product.price }}</p>
-                <p class=\"card-text\">Quantity: {{ product.quantity }}</p>
+                <p class=\"card-text\">Quantite: {{ product.quantite }}</p>
                <a href =\"{{ path('Product_update', {'id': product.id}) }}\" class=\"btn btn-primary\">Update</a> 
                 <a href =\"{{ path('Product_delete', {'id': product.id}) }}\" class=\"btn btn-primary\">Delete</a> 
                 <a href=\"{{ path('add_to_cart', {'id': product.id}) }}\" class=\"btn btn-primary\">Add to cart</a>

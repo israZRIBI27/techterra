@@ -13,7 +13,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* product/form.html.twig */
+/* Product/form.html.twig */
 class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
 {
     private $source;
@@ -40,12 +40,12 @@ class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "product/form.html.twig"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Product/form.html.twig"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "product/form.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Product/form.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "product/form.html.twig", 2);
+        $this->parent = $this->loadTemplate("base.html.twig", "Product/form.html.twig", 2);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -174,18 +174,18 @@ class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
                                 <div class=\"formA-group\">
                                     ";
         // line 56
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 56, $this->source); })()), "quantity", [], "any", false, false, false, 56), 'label', ["label_attr" => ["class" => "formA-label"], "label" => "Product quantity"]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 56, $this->source); })()), "quantite", [], "any", false, false, false, 56), 'label', ["label_attr" => ["class" => "formA-label"], "label" => "Product quantite"]);
         yield "
                                     ";
         // line 57
-        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 57, $this->source); })()), "quantity", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "formA-control", "placeholder" => "Product quantity", "required" => true]]);
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 57, $this->source); })()), "quantite", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "formA-control", "placeholder" => "Product quantite", "required" => true]]);
         yield "
                                     ";
         // line 58
-        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 58, $this->source); })()), "quantity", [], "any", false, false, false, 58), 'errors')) {
+        if ($this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 58, $this->source); })()), "quantite", [], "any", false, false, false, 58), 'errors')) {
             // line 59
             yield "                                        <div class=\"alert alert-danger\">";
-            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 59, $this->source); })()), "quantity", [], "any", false, false, false, 59), 'errors');
+            yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(CoreExtension::getAttribute($this->env, $this->source, (isset($context["formA"]) || array_key_exists("formA", $context) ? $context["formA"] : (function () { throw new RuntimeError('Variable "formA" does not exist.', 59, $this->source); })()), "quantite", [], "any", false, false, false, 59), 'errors');
             yield "</div>
                                     ";
         }
@@ -222,7 +222,7 @@ class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
      */
     public function getTemplateName()
     {
-        return "product/form.html.twig";
+        return "Product/form.html.twig";
     }
 
     /**
@@ -298,10 +298,10 @@ class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
 
                             <div class=\"col-md-6 mb-3\">
                                 <div class=\"formA-group\">
-                                    {{ form_label(formA.quantity, 'Product quantity', {'label_attr': {'class': 'formA-label'}}) }}
-                                    {{ form_widget(formA.quantity, {'attr': {'class': 'formA-control', 'placeholder': 'Product quantity', 'required': true}}) }}
-                                    {% if form_errors(formA.quantity) %}
-                                        <div class=\"alert alert-danger\">{{ form_errors(formA.quantity) }}</div>
+                                    {{ form_label(formA.quantite, 'Product quantite', {'label_attr': {'class': 'formA-label'}}) }}
+                                    {{ form_widget(formA.quantite, {'attr': {'class': 'formA-control', 'placeholder': 'Product quantite', 'required': true}}) }}
+                                    {% if form_errors(formA.quantite) %}
+                                        <div class=\"alert alert-danger\">{{ form_errors(formA.quantite) }}</div>
                                     {% endif %}
                                 </div>
                             </div>
@@ -318,6 +318,6 @@ class __TwigTemplate_39624b433fd0c9805dbd552de290aa63 extends Template
         </div>
     </div>
 {% endblock %}
-", "product/form.html.twig", "C:\\Users\\USER\\Desktop\\techterra\\templates\\product\\form.html.twig");
+", "Product/form.html.twig", "C:\\Users\\USER\\Desktop\\techterra\\templates\\product\\form.html.twig");
     }
 }

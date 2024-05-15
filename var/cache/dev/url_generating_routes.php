@@ -5,12 +5,10 @@
 return [
     'app_admin' => [[], ['_controller' => 'App\\Controller\\AdminController::index'], [], [['text', '/admin']], [], [], []],
     'Product_show_admin' => [[], ['_controller' => 'App\\Controller\\AdminController::show'], [], [['text', '/admin/product/Productlist']], [], [], []],
-    'app_homepage' => [[], ['_controller' => 'App\\Controller\\ChartController::index'], [], [['text', '/']], [], [], []],
     'app_panier' => [[], ['_controller' => 'App\\Controller\\PanierController::index'], [], [['text', '/panier']], [], [], []],
     'add_to_cart' => [['id'], ['_controller' => 'App\\Controller\\PanierController::addToCart'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/add_to_cart']], [], [], []],
     'Panier_show' => [[], ['_controller' => 'App\\Controller\\PanierController::show'], [], [['text', '/Panier/show']], [], [], []],
     'Panier_delete' => [['id'], ['_controller' => 'App\\Controller\\PanierController::deletePanier'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/Panier/delete']], [], [], []],
-    'panier_statistics' => [[], ['_controller' => 'App\\Controller\\PanierController::panierStatistics'], [], [['text', '/chart/chart']], [], [], []],
     'paniers' => [[], ['_controller' => 'App\\Controller\\PanierController::paniers'], [], [['text', '/paniers']], [], [], []],
     'panier_pdf' => [[], ['_controller' => 'App\\Controller\\PanierController::generatePanierPdf'], [], [['text', '/panier/pdf/']], [], [], []],
     'app_payement' => [[], ['_controller' => 'App\\Controller\\PayementController::index'], [], [['text', '/payement']], [], [], []],

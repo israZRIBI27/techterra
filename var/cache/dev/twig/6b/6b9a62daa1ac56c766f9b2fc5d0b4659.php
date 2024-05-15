@@ -13,7 +13,7 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* product/listProductC.html.twig */
+/* Product/listProductC.html.twig */
 class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
 {
     private $source;
@@ -42,12 +42,12 @@ class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
     {
         $macros = $this->macros;
         $__internal_5a27a8ba21ca79b61932376b2fa922d2 = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
-        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "product/listProductC.html.twig"));
+        $__internal_5a27a8ba21ca79b61932376b2fa922d2->enter($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Product/listProductC.html.twig"));
 
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
-        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "product/listProductC.html.twig"));
+        $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "Product/listProductC.html.twig"));
 
-        $this->parent = $this->loadTemplate("base.html.twig", "product/listProductC.html.twig", 1);
+        $this->parent = $this->loadTemplate("base.html.twig", "Product/listProductC.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -227,26 +227,26 @@ class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
             yield " DT <!-- Display original price in EUR format -->
                     </p>
 
-                    <p class=\"card-text\">Quantity: ";
+                    <p class=\"card-text\">Quantite: ";
             // line 94
-            yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantity", [], "any", false, false, false, 94), "html", null, true);
+            yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "quantite", [], "any", false, false, false, 94), "html", null, true);
             yield "</p>
 
                     
 
                     <form action=\"";
             // line 98
-            yield Twig\Extension\EscaperExtension::escape($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_to_cart", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 98), "quantity" => ("quantity" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 98))]), "html", null, true);
+            yield Twig\Extension\EscaperExtension::escape($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_to_cart", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 98), "quantite" => ("quantite" . CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 98))]), "html", null, true);
             yield "\" method=\"post\">
                         <div class=\"form-group\">
-                            <label for=\"quantity";
+                            <label for=\"quantite";
             // line 100
             yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 100), "html", null, true);
-            yield "\">Quantity:</label>
-                            <input type=\"number\" id=\"quantity";
+            yield "\">Quantite:</label>
+                            <input type=\"number\" id=\"quantite";
             // line 101
             yield Twig\Extension\EscaperExtension::escape($this->env, CoreExtension::getAttribute($this->env, $this->source, $context["product"], "id", [], "any", false, false, false, 101), "html", null, true);
-            yield "\" name=\"quantity\" class=\"form-control\" value=\"1\" min=\"1\" required>
+            yield "\" name=\"quantite\" class=\"form-control\" value=\"1\" min=\"1\" required>
                         </div>
                         <button type=\"submit\" class=\"btn btn-primary\">Add to Cart</button>
                     </form>
@@ -318,7 +318,7 @@ class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
      */
     public function getTemplateName()
     {
-        return "product/listProductC.html.twig";
+        return "Product/listProductC.html.twig";
     }
 
     /**
@@ -432,14 +432,14 @@ class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
                         {{ product.price }} DT <!-- Display original price in EUR format -->
                     </p>
 
-                    <p class=\"card-text\">Quantity: {{ product.quantity }}</p>
+                    <p class=\"card-text\">Quantite: {{ product.quantite }}</p>
 
                     
 
-                    <form action=\"{{ path('add_to_cart', {'id': product.id, 'quantity': 'quantity' ~ product.id }) }}\" method=\"post\">
+                    <form action=\"{{ path('add_to_cart', {'id': product.id, 'quantite': 'quantite' ~ product.id }) }}\" method=\"post\">
                         <div class=\"form-group\">
-                            <label for=\"quantity{{ product.id }}\">Quantity:</label>
-                            <input type=\"number\" id=\"quantity{{ product.id }}\" name=\"quantity\" class=\"form-control\" value=\"1\" min=\"1\" required>
+                            <label for=\"quantite{{ product.id }}\">Quantite:</label>
+                            <input type=\"number\" id=\"quantite{{ product.id }}\" name=\"quantite\" class=\"form-control\" value=\"1\" min=\"1\" required>
                         </div>
                         <button type=\"submit\" class=\"btn btn-primary\">Add to Cart</button>
                     </form>
@@ -488,6 +488,6 @@ class __TwigTemplate_81f38c8b30530e9d0751db235d290c7c extends Template
             border-radius: 4px;
             margin-top: -7px;            }
 </style>
-{% endblock %}", "product/listProductC.html.twig", "C:\\Users\\USER\\Desktop\\techterra\\templates\\product\\listProductC.html.twig");
+{% endblock %}", "Product/listProductC.html.twig", "C:\\Users\\USER\\Desktop\\techterra\\templates\\product\\listProductC.html.twig");
     }
 }

@@ -10,10 +10,8 @@ return [
     [ // $staticRoutes
         '/admin' => [[['_route' => 'app_admin', '_controller' => 'App\\Controller\\AdminController::index'], null, null, null, false, false, null]],
         '/admin/product/Productlist' => [[['_route' => 'Product_show_admin', '_controller' => 'App\\Controller\\AdminController::show'], null, null, null, false, false, null]],
-        '/' => [[['_route' => 'app_homepage', '_controller' => 'App\\Controller\\ChartController::index'], null, null, null, false, false, null]],
         '/panier' => [[['_route' => 'app_panier', '_controller' => 'App\\Controller\\PanierController::index'], null, null, null, false, false, null]],
         '/Panier/show' => [[['_route' => 'Panier_show', '_controller' => 'App\\Controller\\PanierController::show'], null, null, null, false, false, null]],
-        '/chart/chart' => [[['_route' => 'panier_statistics', '_controller' => 'App\\Controller\\PanierController::panierStatistics'], null, null, null, false, false, null]],
         '/paniers' => [[['_route' => 'paniers', '_controller' => 'App\\Controller\\PanierController::paniers'], null, null, null, false, false, null]],
         '/panier/pdf' => [[['_route' => 'panier_pdf', '_controller' => 'App\\Controller\\PanierController::generatePanierPdf'], null, null, null, true, false, null]],
         '/payement' => [[['_route' => 'app_payement', '_controller' => 'App\\Controller\\PayementController::index'], null, null, null, false, false, null]],

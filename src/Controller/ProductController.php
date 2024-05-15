@@ -40,8 +40,10 @@ class ProductController extends AbstractController
     
             if ($imageFile) {
                 // Use a unique name for the image to prevent conflicts
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-    
+               // $newFilename = uniqid().'.'.$imageFile->guessExtension();
+               $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+               $newFilename = $originalFilename.'.'.$imageFile->guessExtension();
+
                 try {
                     // Move the uploaded file to a directory where images are stored
                     $imageFile->move(
